@@ -9,9 +9,8 @@ public class Mesas {
     public Mesas() {
     }
 
-    public Mesas(String nome, List<Pedidos> pedidos) {
+    public Mesas(String nome) {
         this.nome = nome;
-        this.pedidos = pedidos;
     }
 
     public String getNome() {
@@ -28,6 +27,11 @@ public class Mesas {
 
     public void setPedidos(List <Pedidos> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome; //To change body of generated methods, choose Tools | Templates.
     }
 
     

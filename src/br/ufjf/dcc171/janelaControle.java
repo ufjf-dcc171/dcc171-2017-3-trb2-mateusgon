@@ -11,42 +11,96 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class janelaControle extends JFrame {
         
-        //private final List<Mesas> mesas;
+        private int i;
+        private final List<Mesas> mesas;
         private final JList<Mesas> lstMesas = new JList<>(new DefaultListModel<>());
         private final JList<Pedidos> lstPedidos = new JList<>(new DefaultListModel<>());
         private final JButton adicionarMesa = new JButton("Adicionar Mesa");
         private final JButton excluirMesa = new JButton("Excluir Mesa");
         private final JButton realizarPedido = new JButton("Realizar Pedido");
         private final JButton fecharConta = new JButton("Fechar Conta");
-        
+        private final JButton alterarPedido = new JButton("Alterar Pedido");
+        private final JButton excluirPedido = new JButton("Excluir Pedido");
     
-    public janelaControle() throws HeadlessException {
+    public janelaControle(List<Mesas> sampleData) throws HeadlessException {
         super("Controle de Pedidos");
-        setMinimumSize(new Dimension(300, 300));
+        setMinimumSize(new Dimension(534, 400));
         
-        JPanel botoes = new JPanel(new GridLayout(2, 2));
+        this.mesas = sampleData;
+        lstMesas.setModel(new MesasListModel(mesas));
+        
+        
+        JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);
         botoes.add(realizarPedido);
+        botoes.add(excluirPedido);
         botoes.add(excluirMesa);
+        botoes.add(alterarPedido);
         botoes.add(fecharConta);
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
         add(new JScrollPane(lstPedidos), BorderLayout.CENTER);
         add(botoes, BorderLayout.SOUTH);  
         
+        lstMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         realizarPedido.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 Mesas selecionado = lstMesas.getSelectedValue();
+                   if (selecionado != null)
+                   {
+                       janelaPedidos pedidos = new janelaPedidos();
+                       pedidos.setSize(534, 400);
+                       pedidos.setLocationRelativeTo(null);
+                       pedidos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                       pedidos.setVisible(true);
+                   }
+                   else
+                   {
+                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                    }
+            }
+        });
+                
+        adicionarMesa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+               i++;
+               Mesas m = new Mesas("Mesa " + i);
+               mesas.add(m);
+               lstMesas.updateUI();
+               pack();
+            }
+        });
+        
+        excluirMesa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                janelaPedidos pedidos = new janelaPedidos();
-                pedidos.setSize(534, 400);
-                pedidos.setLocationRelativeTo(null);
-                pedidos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                pedidos.setVisible(true);    
+                Mesas selecionado = lstMesas.getSelectedValue();
+                   if (selecionado != null)
+                   {
+                       
+                   }
+                   else
+                   {
+                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                   }
+            }
+        });
+        
+        fecharConta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               
             }
         });
     }    
