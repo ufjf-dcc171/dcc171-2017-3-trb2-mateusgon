@@ -17,6 +17,8 @@ public final class JtextFieldSomenteNumeros extends JTextField {
             }
         });
     }
+    
+    
 
     private void jTextFieldKeyTyped(KeyEvent evt) {
 

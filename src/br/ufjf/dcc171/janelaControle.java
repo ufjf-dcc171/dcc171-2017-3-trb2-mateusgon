@@ -105,5 +105,19 @@ public class janelaControle extends JFrame {
                
             }
         });
+        
+        verCardapio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
+        fecharConta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }    
 }
