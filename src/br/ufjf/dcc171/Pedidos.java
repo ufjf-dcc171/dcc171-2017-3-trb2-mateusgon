@@ -7,20 +7,19 @@ public class Pedidos {
     private  double valorItem[];
     private  boolean status;
 
-    public Pedidos(String[] item, double[] valorItem, boolean status) {
+    public Pedidos(String nome, String[] item, double[] valorItem, boolean status) {
         this.item = item;
         this.valorItem = valorItem;
         this.status = status;
     }
 
-    public Pedidos() {
-    }
-
     public Pedidos(String nome) {
         this.nome = nome;
     }
-    
-    
+
+    public Pedidos() {
+        
+    }
 
     public String[] getItem() {
         return item;
@@ -44,6 +43,15 @@ public class Pedidos {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
     

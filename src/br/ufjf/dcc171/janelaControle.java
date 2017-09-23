@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 public class janelaControle extends JFrame {
         
         private int i;
+        private int contadorPedidos=0;
         private final List<Mesas> mesas;
         private final JList<Mesas> lstMesas = new JList<>(new DefaultListModel<>());
         private final JList<Pedidos> lstPedidos = new JList<>(new DefaultListModel<>());
@@ -76,9 +79,21 @@ public class janelaControle extends JFrame {
                        janelaPedidos pedidos = new janelaPedidos();
                        pedidos.setSize(534, 400);
                        pedidos.setLocationRelativeTo(null);
-                       pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                       pedidos.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //dispose
                        pedidos.setVisible(true);
-                       Pedidos p1 = pedidos.pedidoSelecionado();
+                       pedidos.addWindowListener(new WindowAdapter() {
+                           @Override
+                           public void windowClosing(WindowEvent evt) {
+                               if (JOptionPane.showConfirmDialog(null, "Terminou realmente o seu pedido?") == JOptionPane.OK_OPTION) {
+                                   Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
+                                   
+                                   lstMesas.getSelectedValue().getPedidos().add(p1);
+                                   lstPedidos.updateUI();
+                                   lstMesas.updateUI();
+                                   pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                               }
+                           }
+                       });
                    }
                    else
                    {

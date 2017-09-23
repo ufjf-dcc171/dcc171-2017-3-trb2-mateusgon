@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 public class janelaPedidos extends JFrame{
 
     private Pedidos pedido;
+    private boolean pedidoFeito = false;
     
     private final JPanel temp = new JPanel();
     private final JPanel temp2 = new JPanel();
@@ -172,15 +173,23 @@ public class janelaPedidos extends JFrame{
                         j[i] = parseInt(quantidade[i].getText());
                     else
                         j[i] = 0;
-                } 
-                pedido = new Pedidos("Teste");
+                }
+                pedido = new Pedidos();
+                SampleDataPedidos sp1 = new SampleDataPedidos();
+                pedido = sp1.getPedido();
             }
         });        
     }
     
-    Pedidos pedidoSelecionado ()
-        {
+    Pedidos pedidoSelecionado (String nome)
+        {  
+            
+            System.out.println(pedido);
+            pedido.set
             return this.pedido;
         }
-    
+
+    public boolean isPedidoFeito() {
+        return pedidoFeito;
+    }
 }
