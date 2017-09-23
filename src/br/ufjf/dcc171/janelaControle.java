@@ -52,6 +52,21 @@ public class janelaControle extends JFrame {
         add(botoes, BorderLayout.SOUTH);  
         
         lstMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lstMesas.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Mesas selecionado = lstMesas.getSelectedValue();
+                if (selecionado != null)
+                   {
+                      lstPedidos.setModel(new PedidosListModel(selecionado.getPedidos()));   
+                   }
+                else
+                    {
+                      lstPedidos.setModel(new DefaultListModel<>());
+                    }
+            }
+        });
+        
         realizarPedido.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {
@@ -63,11 +78,13 @@ public class janelaControle extends JFrame {
                        pedidos.setLocationRelativeTo(null);
                        pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                        pedidos.setVisible(true);
+                       Pedidos p1 = pedidos.pedidoSelecionado();
                    }
                    else
                    {
                        JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
-                    }
+                   }
+                   
             }
         });
                 

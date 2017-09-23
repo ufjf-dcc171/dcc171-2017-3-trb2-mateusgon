@@ -1,5 +1,6 @@
 package br.ufjf.dcc171;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mesas {
@@ -11,6 +12,7 @@ public class Mesas {
 
     public Mesas(String nome) {
         this.nome = nome;
+        this.pedidos = new ArrayList<>();
     }
 
     public String getNome() {
