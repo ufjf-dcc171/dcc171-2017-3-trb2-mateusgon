@@ -177,6 +177,17 @@ public class janelaPedidos extends JFrame{
                 pedido = new Pedidos();
                 SampleDataPedidos sp1 = new SampleDataPedidos();
                 pedido = sp1.getPedido();
+                for (int i = 0; i < 20; i++)
+                {
+                    if (j[i] != 0)
+                    {
+                        double valor;
+                        pedido.setValorItemIndividual((valor = pedido.getValorItemPosicao(i) * j[i]), i);
+                        pedido.setValor(valor);
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + "Valor Total: R$" + pedido.getValor(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                
             }
         });        
     }
@@ -184,8 +195,8 @@ public class janelaPedidos extends JFrame{
     Pedidos pedidoSelecionado (String nome)
         {  
             
+            pedido.setNome(nome);
             System.out.println(pedido);
-            pedido.set
             return this.pedido;
         }
 

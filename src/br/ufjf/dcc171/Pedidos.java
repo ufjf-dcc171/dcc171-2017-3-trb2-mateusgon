@@ -3,9 +3,10 @@ package br.ufjf.dcc171;
 public class Pedidos {
 
     private String nome;
-    private  String item[];
-    private  double valorItem[];
-    private  boolean status;
+    private String item[];
+    private double valorItem[];
+    private boolean status;
+    private double valor;
 
     public Pedidos(String nome, String[] item, double[] valorItem, boolean status) {
         this.item = item;
@@ -32,9 +33,19 @@ public class Pedidos {
     public double[] getValorItem() {
         return valorItem;
     }
+    
+    public double getValorItemPosicao(int i)
+    {
+        return valorItem[i];
+    }
 
     public void setValorItem(double[] valorItem) {
         this.valorItem = valorItem;
+    }
+    
+    public void setValorItemIndividual (double valorItemIndividual, int posicao)
+    {
+        valorItem[posicao] = valorItemIndividual;
     }
 
     public boolean isStatus() {
@@ -53,6 +64,13 @@ public class Pedidos {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor + this.valor;
+    }
     
 }

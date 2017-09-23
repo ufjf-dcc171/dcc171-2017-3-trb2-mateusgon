@@ -11,8 +11,6 @@ public class SampleDataPedidos {
     private final double valorItem[] = {42.9, 40.9, 40.9, 41.9, 42.9, 43.9, 41.9, 42.9, 40.9, 41.9, 43.9, 44.9, 
     5.0, 13.0, 10.0, 9.0, 6.0, 10.0, 5.0, 7.0};
     private final boolean statusDoPedidoAberto = true;
-
-    
     
     public SampleDataPedidos() {
         p1 = new Pedidos();

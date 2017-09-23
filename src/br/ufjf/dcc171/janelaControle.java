@@ -86,7 +86,7 @@ public class janelaControle extends JFrame {
                            public void windowClosing(WindowEvent evt) {
                                if (JOptionPane.showConfirmDialog(null, "Terminou realmente o seu pedido?") == JOptionPane.OK_OPTION) {
                                    Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
-                                   
+                                   contadorPedidos++;
                                    lstMesas.getSelectedValue().getPedidos().add(p1);
                                    lstPedidos.updateUI();
                                    lstMesas.updateUI();
