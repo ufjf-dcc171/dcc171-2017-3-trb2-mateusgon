@@ -28,7 +28,7 @@ public class janelaControle extends JFrame {
         private final JButton excluirMesa = new JButton("Excluir Mesa");
         private final JButton realizarPedido = new JButton("Realizar Pedido");
         private final JButton fecharConta = new JButton("Fechar Conta");
-        private final JButton alterarPedido = new JButton("Alterar Pedido");
+        private final JButton verCardapio = new JButton("Ver Cardapio");
         private final JButton excluirPedido = new JButton("Excluir Pedido");
     
     public janelaControle(List<Mesas> sampleData) throws HeadlessException {
@@ -42,9 +42,9 @@ public class janelaControle extends JFrame {
         JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);
         botoes.add(realizarPedido);
-        botoes.add(excluirPedido);
+        botoes.add(verCardapio);
         botoes.add(excluirMesa);
-        botoes.add(alterarPedido);
+        botoes.add(excluirPedido);
         botoes.add(fecharConta);
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
@@ -61,7 +61,7 @@ public class janelaControle extends JFrame {
                        janelaPedidos pedidos = new janelaPedidos();
                        pedidos.setSize(534, 400);
                        pedidos.setLocationRelativeTo(null);
-                       pedidos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                       pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                        pedidos.setVisible(true);
                    }
                    else
@@ -88,7 +88,9 @@ public class janelaControle extends JFrame {
                 Mesas selecionado = lstMesas.getSelectedValue();
                    if (selecionado != null)
                    {
-                       
+                       mesas.remove(lstMesas.getSelectedValue());
+                       lstMesas.clearSelection();
+                       lstMesas.updateUI();
                    }
                    else
                    {
