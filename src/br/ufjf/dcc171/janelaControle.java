@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -52,6 +53,7 @@ public class janelaControle extends JFrame {
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
         add(new JScrollPane(lstPedidos), BorderLayout.CENTER);
+        add(new JScrollPane(),BorderLayout.EAST);
         add(botoes, BorderLayout.SOUTH);  
         
         lstMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -134,7 +136,42 @@ public class janelaControle extends JFrame {
         fecharConta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+                Mesas selecionado = lstMesas.getSelectedValue();
+                    if (selecionado != null)
+                    {
+                        Pedidos p = mesas.get(0).getPedidos().get(0);
+                        p.setStatus(false);
+                        List<Pedidos> pedidos = selecionado.getPedidos();
+                        int itemSelecionado[][] = new int [pedidos.size()][21];
+                        double [] valor = new double[pedidos.size()];
+                        int i = 0;
+                        int j = 0;
+                        int k = 0;
+                        for (Pedidos ped : pedidos)
+                        {
+                            for (k = 0; k < 20; k++)
+                            {
+                                itemSelecionado[i][k] = ped.getItemSelecionado(k);
+                            }
+                            valor[i] = ped.getValor();
+                            i++;
+                        }   
+                        j = k;
+                        JanelaConta conta = new JanelaConta(itemSelecionado, i, j+1, valor);
+                        conta.setSize(534, 400);
+                        conta.setLocationRelativeTo(null);
+                        conta.setVisible(true);
+                        conta.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent evt) {
+                            conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        }
+                        });
+                    }
+                    else
+                    {
+                        
+                    }
             }
         });
         

@@ -1,12 +1,19 @@
 package br.ufjf.dcc171;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Pedidos {
 
     private String nome;
     private String item[];
     private double valorItem[];
+    private int itemSelecionado[];
     private boolean status;
     private double valor;
+    private Date aberto;
+    private Date fechado;
 
     public Pedidos(String nome, String[] item, double[] valorItem, boolean status) {
         this.item = item;
@@ -71,6 +78,32 @@ public class Pedidos {
 
     public void setValor(double valor) {
         this.valor = valor + this.valor;
+    }
+
+    public int getItemSelecionado(int i) {
+        return itemSelecionado[i];
+    }
+
+    public void setItemSelecionado(int[] itemSelecionado) {
+        this.itemSelecionado = itemSelecionado;
+    }
+
+    public String getAberto() {
+        DateFormat dtHora = DateFormat.getDateTimeInstance();
+        return dtHora.format(aberto);
+    }
+
+    public void setAberto(Date aberto) {
+        this.aberto = aberto;
+    }
+
+    public String getFechado() {
+        DateFormat dtHora = DateFormat.getDateTimeInstance();
+        return dtHora.format(fechado);
+    }
+
+    public void setFechado(Date fechado) {
+        this.fechado = fechado;
     }
     
 }

@@ -6,6 +6,8 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,7 +24,6 @@ public class janelaPedidos extends JFrame{
 
     private Pedidos pedido;
     private SampleDataPedidos pedido3 = new SampleDataPedidos();
-    private boolean pedidoFeito = false;
     
     private final JPanel temp = new JPanel();
     private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Pizzas Salgadas", "Pizzas Doces", "Sobremesas", "Bebidas"});
@@ -184,8 +185,11 @@ public class janelaPedidos extends JFrame{
                         pedido.setValor(valor);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
-                
+                Calendar c = Calendar.getInstance();
+                Date data = c.getTime();
+                pedido.setAberto(data);
+                pedido.setItemSelecionado(j);
+                JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
             }
         });        
     }
@@ -196,7 +200,4 @@ public class janelaPedidos extends JFrame{
             return this.pedido;
         }
 
-    public boolean isPedidoFeito() {
-        return pedidoFeito;
-    }
 }

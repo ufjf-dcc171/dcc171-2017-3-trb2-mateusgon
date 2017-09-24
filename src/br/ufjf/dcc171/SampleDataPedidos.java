@@ -31,6 +31,30 @@ public class SampleDataPedidos {
     public String toString(int posicao) {
         return posicao + " - " + itemNome[posicao] + " - R$" + valorItem[posicao];
     }
+    
+    public String toString(int posicao, int m) {
+        return posicao + " - " + itemNome[posicao] + " - R$" + valorItem[posicao * m];
+    }
+
+    public Pedidos getP1() {
+        return p1;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getItemNome(int i) {
+        return itemNome[i];
+    }
+
+    public double getValorItem(int i) {
+        return valorItem[i];
+    }
+
+    public boolean isStatusDoPedidoAberto() {
+        return statusDoPedidoAberto;
+    }
 
     
 }
