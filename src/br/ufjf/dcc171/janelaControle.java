@@ -141,7 +141,16 @@ public class janelaControle extends JFrame {
         verCardapio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                JanelaCardapio cardapio = new JanelaCardapio();
+                cardapio.setSize(534, 400);
+                cardapio.setLocationRelativeTo(null);
+                cardapio.setVisible(true);
+                cardapio.addWindowListener(new WindowAdapter() {
+                @Override
+                           public void windowClosing(WindowEvent evt) {
+                               cardapio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                           }
+                });
             }
         });
         
