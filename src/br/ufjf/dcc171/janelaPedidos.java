@@ -174,6 +174,7 @@ public class janelaPedidos extends JFrame{
                     {
                         j[i] = parseInt(quantidade[i].getText());
                         possuiProdutos = true;
+                        System.out.println("q");
                     }    
                     else
                         j[i] = 0;
@@ -194,9 +195,15 @@ public class janelaPedidos extends JFrame{
                 Date data = c.getTime();
                 pedido.setAberto(data);
                 pedido.setItemSelecionado(j);
-                JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
                 if (possuiProdutos)
+                {
                     fechar = true;
+                    JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                }
             }
         });        
     }

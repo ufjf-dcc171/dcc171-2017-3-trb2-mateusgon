@@ -102,8 +102,16 @@ public class janelaControle extends JFrame {
                                    }
                                    else
                                    {
-                                        pedidos.setVisible(false);
-                                        pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                        int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                                        if (resposta == JOptionPane.YES_OPTION)
+                                        {
+                                                    pedidos.setVisible(false);
+                                                    pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                        }
+                                        else
+                                        {  
+                                            actionPerformed(e);
+                                        } 
                                    }
                                 }
                          //  }
