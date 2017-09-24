@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -139,49 +141,59 @@ public class janelaControle extends JFrame {
                 Mesas selecionado = lstMesas.getSelectedValue();
                     if (selecionado != null)
                     {
-                        Pedidos p = mesas.get(selecionado.getNumero()).getPedidos().get(0);
-                        p.setStatus(false);
                         List<Pedidos> pedidos = selecionado.getPedidos();
-                        int itemSelecionado[][] = new int [pedidos.size()][21];
+                        int itemSelecionado[][] = new int [pedidos.size()][20];
                         double [] valor = new double[pedidos.size()];
+                        Calendar c = Calendar.getInstance();
+                        Date data = c.getTime(); 
+                                
                         int i = 0;
                         int j = 0;
-                        int k = 0;
+                        int k = -1;
                         for (Pedidos ped : pedidos)
                         {
-                            for (k = 0; k < 20; k++)
+                            if (ped.isStatus())
                             {
-                                itemSelecionado[i][k] = ped.getItemSelecionado(k);
+                                for (k = 0; k < 20; k++)
+                                {
+                                    itemSelecionado[i][k] = ped.getItemSelecionado(k);
+                                }
+                                valor[i] = ped.getValor();
+                                i++;
+                                data = c.getTime();
+                                ped.setFechado(data);
+                                ped.setStatus(false);
                             }
-                            valor[i] = ped.getValor();
-                            i++;
-                        }   
+                        }    
                         j = k;
-                        JanelaConta conta = new JanelaConta(itemSelecionado, i, j+1, valor);
-                        conta.setSize(534, 400);
-                        conta.setLocationRelativeTo(null);
-                        conta.setVisible(true);
-                        conta.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent evt) {
-                            conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        if (j > -1)
+                        {
+                            JanelaConta conta = new JanelaConta(itemSelecionado, i, j, valor, data);
+                            conta.setSize(534, 400);
+                            conta.setLocationRelativeTo(null);
+                            conta.setVisible(true);
+                            conta.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosing(WindowEvent evt) {
+                                conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            }
+                            });
+                          /*  for 
+                            lstMesas.getSelectedValue().getPedidos().remove(p);
+                            lstPedidos.updateUI();
+                            lstMesas.updateUI();
+                            mesas.remove(lstMesas.getSelectedValue());
+                            lstMesas.clearSelection();
+                            lstMesas.updateUI(); */
                         }
-                        });
-                        pedidos.stream().map((ped) -> {
-                            lstMesas.getSelectedValue().getPedidos().remove(ped);
-                        return ped;
-                    }).map((_item) -> {
-                        lstPedidos.updateUI(); 
-                        return _item;
-                    }).forEachOrdered((_item) -> {
-                        lstMesas.updateUI();
-                    });
-                        lstPedidos.updateUI();
-                        lstMesas.updateUI();
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Não há pedidos em aberto para essa mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     else
                     {
-                        
+                        JOptionPane.showMessageDialog(null, "Você não selecionou uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
                     }
             }
         });

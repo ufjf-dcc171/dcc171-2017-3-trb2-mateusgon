@@ -17,8 +17,6 @@ public class Mesas {
         this.pedidos = new ArrayList<>();
     }
 
-    
-    
     public String getNome() {
         return nome;
     }
