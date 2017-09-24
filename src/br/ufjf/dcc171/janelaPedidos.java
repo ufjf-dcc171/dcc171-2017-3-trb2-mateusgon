@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 public class janelaPedidos extends JFrame{
 
+    private Boolean fechar = false;
     private Pedidos pedido;
     private SampleDataPedidos pedido3 = new SampleDataPedidos();
     
@@ -165,11 +166,15 @@ public class janelaPedidos extends JFrame{
      confirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean possuiProdutos = false;
                 int j[] = new int[20];
                 for (int i = 0; i < 20; i++)
                 {
                     if (!"".equals(quantidade[i].getText()))
+                    {
                         j[i] = parseInt(quantidade[i].getText());
+                        possuiProdutos = true;
+                    }    
                     else
                         j[i] = 0;
                 }
@@ -190,14 +195,28 @@ public class janelaPedidos extends JFrame{
                 pedido.setAberto(data);
                 pedido.setItemSelecionado(j);
                 JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                if (possuiProdutos)
+                    fechar = true;
             }
         });        
     }
     
     Pedidos pedidoSelecionado (String nome)
         {  
-            pedido.setNome(nome);
-            return this.pedido;
+            if(nome == null)
+                return null;
+            else
+            {
+                pedido.setNome(nome);
+                return this.pedido;
+            }
+            
         }
+
+    public Boolean getFechar() {
+        return fechar;
+    }
+    
+    
 
 }

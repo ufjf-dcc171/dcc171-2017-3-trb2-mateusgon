@@ -65,7 +65,7 @@ public class Pedidos {
 
     @Override
     public String toString() {
-        return this.nome;
+        return this.nome + " - " + "R$" + this.valor + " - " + this.getAberto();
     }
 
     public void setNome(String nome) {
@@ -105,5 +105,11 @@ public class Pedidos {
     public void setFechado(Date fechado) {
         this.fechado = fechado;
     }
+
+    public String getNome() {
+        return nome;
+    }
+    
+    
     
 }

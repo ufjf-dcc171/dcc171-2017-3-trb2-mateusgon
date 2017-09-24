@@ -40,6 +40,7 @@ public class janelaControle extends JFrame {
     public janelaControle(List<Mesas> sampleData) throws HeadlessException {
         super("Controle de Pedidos");
         setMinimumSize(new Dimension(534, 400));
+        setPreferredSize(new Dimension(534, 400));
         
         this.mesas = sampleData;
         lstMesas.setModel(new MesasListModel(mesas));
@@ -84,20 +85,28 @@ public class janelaControle extends JFrame {
                        janelaPedidos pedidos = new janelaPedidos();
                        pedidos.setSize(534, 400);
                        pedidos.setLocationRelativeTo(null);
-                       pedidos.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //dispose
+                       pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //dispose
                        pedidos.setVisible(true);
                        pedidos.addWindowListener(new WindowAdapter() {
                            @Override
                            public void windowClosing(WindowEvent evt) {
-                               if (JOptionPane.showConfirmDialog(null, "Terminou realmente o seu pedido?") == JOptionPane.OK_OPTION) {
-                                   Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
-                                   contadorPedidos++;
-                                   lstMesas.getSelectedValue().getPedidos().add(p1);
-                                   lstPedidos.updateUI();
-                                   lstMesas.updateUI();
-                                   pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                               }
-                           }
+                               //if (JOptionPane.showConfirmDialog(null, "Terminou realmente o seu pedido?") == JOptionPane.OK_OPTION) {
+                                   if (pedidos.getFechar())
+                                   {
+                                       Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
+                                            contadorPedidos++;
+                                            lstMesas.getSelectedValue().getPedidos().add(p1);
+                                            lstPedidos.updateUI();
+                                            lstMesas.updateUI();
+                                            pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                   }
+                                   else
+                                   {
+                                        pedidos.setVisible(false);
+                                        pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                   }
+                                }
+                         //  }
                        });
                    }
                    else
