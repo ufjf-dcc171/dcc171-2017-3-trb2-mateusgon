@@ -44,6 +44,8 @@ public class janelaControle extends JFrame {
         this.mesas = sampleData;
         lstMesas.setModel(new MesasListModel(mesas));
         
+        lstMesas.setPreferredSize(new Dimension(267, 200));
+        lstPedidos.setPreferredSize(new Dimension(217, 200));
         
         JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);
@@ -55,7 +57,6 @@ public class janelaControle extends JFrame {
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
         add(new JScrollPane(lstPedidos), BorderLayout.CENTER);
-        add(new JScrollPane(),BorderLayout.EAST);
         add(botoes, BorderLayout.SOUTH);  
         
         lstMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -138,9 +139,11 @@ public class janelaControle extends JFrame {
         fecharConta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int numero; 
                 Mesas selecionado = lstMesas.getSelectedValue();
                     if (selecionado != null)
                     {
+                        numero = selecionado.getNumero();
                         List<Pedidos> pedidos = selecionado.getPedidos();
                         int itemSelecionado[][] = new int [pedidos.size()][20];
                         double [] valor = new double[pedidos.size()];
@@ -178,13 +181,13 @@ public class janelaControle extends JFrame {
                                 conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
                             });
-                          /*  for 
-                            lstMesas.getSelectedValue().getPedidos().remove(p);
-                            lstPedidos.updateUI();
-                            lstMesas.updateUI();
+                            
                             mesas.remove(lstMesas.getSelectedValue());
                             lstMesas.clearSelection();
-                            lstMesas.updateUI(); */
+                            lstMesas.updateUI();
+                            Mesas m = new Mesas("Mesa " + numero, numero);
+                            mesas.add(m);
+                            lstMesas.updateUI();
                         }
                         else
                         {
