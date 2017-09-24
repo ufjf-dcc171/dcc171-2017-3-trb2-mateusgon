@@ -109,7 +109,7 @@ public class janelaControle extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)  {
                i++;
-               Mesas m = new Mesas("Mesa " + i);
+               Mesas m = new Mesas("Mesa " + i, i);
                mesas.add(m);
                lstMesas.updateUI();
                pack();
@@ -139,7 +139,7 @@ public class janelaControle extends JFrame {
                 Mesas selecionado = lstMesas.getSelectedValue();
                     if (selecionado != null)
                     {
-                        Pedidos p = mesas.get(0).getPedidos().get(0);
+                        Pedidos p = mesas.get(selecionado.getNumero()).getPedidos().get(0);
                         p.setStatus(false);
                         List<Pedidos> pedidos = selecionado.getPedidos();
                         int itemSelecionado[][] = new int [pedidos.size()][21];
@@ -167,6 +167,17 @@ public class janelaControle extends JFrame {
                             conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         }
                         });
+                        pedidos.stream().map((ped) -> {
+                            lstMesas.getSelectedValue().getPedidos().remove(ped);
+                        return ped;
+                    }).map((_item) -> {
+                        lstPedidos.updateUI(); 
+                        return _item;
+                    }).forEachOrdered((_item) -> {
+                        lstMesas.updateUI();
+                    });
+                        lstPedidos.updateUI();
+                        lstMesas.updateUI();
                     }
                     else
                     {
@@ -191,11 +202,5 @@ public class janelaControle extends JFrame {
             }
         });
         
-        fecharConta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
     }    
 }
