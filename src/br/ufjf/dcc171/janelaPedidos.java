@@ -174,7 +174,6 @@ public class janelaPedidos extends JFrame{
                     {
                         j[i] = parseInt(quantidade[i].getText());
                         possuiProdutos = true;
-                        System.out.println("q");
                     }    
                     else
                         j[i] = 0;
@@ -198,7 +197,7 @@ public class janelaPedidos extends JFrame{
                 if (possuiProdutos)
                 {
                     fechar = true;
-                    JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + " Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + "Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {

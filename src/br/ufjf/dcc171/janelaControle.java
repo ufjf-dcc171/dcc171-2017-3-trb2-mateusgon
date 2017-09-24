@@ -90,7 +90,6 @@ public class janelaControle extends JFrame {
                        pedidos.addWindowListener(new WindowAdapter() {
                            @Override
                            public void windowClosing(WindowEvent evt) {
-                               //if (JOptionPane.showConfirmDialog(null, "Terminou realmente o seu pedido?") == JOptionPane.OK_OPTION) {
                                    if (pedidos.getFechar())
                                    {
                                        Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
@@ -114,7 +113,6 @@ public class janelaControle extends JFrame {
                                         } 
                                    }
                                 }
-                         //  }
                        });
                    }
                    else
@@ -177,6 +175,7 @@ public class janelaControle extends JFrame {
                                 for (k = 0; k < 20; k++)
                                 {
                                     itemSelecionado[i][k] = ped.getItemSelecionado(k);
+                                    //System.out.println(itemSelecionado[i][k]);
                                 }
                                 valor[i] = ped.getValor();
                                 i++;

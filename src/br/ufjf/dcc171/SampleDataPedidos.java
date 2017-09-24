@@ -33,7 +33,7 @@ public class SampleDataPedidos {
     }
     
     public String toString(int posicao, int m) {
-        return "Quantidade " + m + " - Item: " + posicao + " - " + itemNome[posicao] + " - R$" + valorItem[posicao * m];
+        return "Quantidade " + m + " - Item: " + posicao + " - " + itemNome[posicao] + " - R$" + valorItem[posicao] * m;
     }
 
     public Pedidos getP1() {
