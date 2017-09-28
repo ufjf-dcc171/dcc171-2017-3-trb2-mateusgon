@@ -45,8 +45,8 @@ public class janelaControle extends JFrame {
         this.mesas = sampleData;
         lstMesas.setModel(new MesasListModel(mesas));
         
-        lstMesas.setPreferredSize(new Dimension(267, 200));
-        lstPedidos.setPreferredSize(new Dimension(217, 200));
+        lstMesas.setPreferredSize(new Dimension(217, 200));
+        lstPedidos.setPreferredSize(new Dimension(267, 200));
         
         JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);
@@ -67,11 +67,13 @@ public class janelaControle extends JFrame {
                 Mesas selecionado = lstMesas.getSelectedValue();
                 if (selecionado != null)
                    {
-                      lstPedidos.setModel(new PedidosListModel(selecionado.getPedidos()));   
+                      lstPedidos.setModel(new PedidosListModel(selecionado.getPedidos()));
+                      lstPedidos.clearSelection();
                    }
                 else
                     {
                       lstPedidos.setModel(new DefaultListModel<>());
+                      lstPedidos.clearSelection();
                     }
             }
         });
@@ -85,7 +87,7 @@ public class janelaControle extends JFrame {
                        janelaPedidos pedidos = new janelaPedidos();
                        pedidos.setSize(534, 400);
                        pedidos.setLocationRelativeTo(null);
-                       pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //dispose
+                       pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                        pedidos.setVisible(true);
                        pedidos.addWindowListener(new WindowAdapter() {
                            @Override
@@ -104,8 +106,8 @@ public class janelaControle extends JFrame {
                                         int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
                                         if (resposta == JOptionPane.YES_OPTION)
                                         {
-                                                    pedidos.setVisible(false);
-                                                    pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                            pedidos.setVisible(false);
+                                            pedidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                         }
                                         else
                                         {  
@@ -117,9 +119,8 @@ public class janelaControle extends JFrame {
                    }
                    else
                    {
-                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
                    }
-                   
             }
         });
                 
@@ -146,7 +147,7 @@ public class janelaControle extends JFrame {
                    }
                    else
                    {
-                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
                    }
             }
         });
@@ -163,8 +164,7 @@ public class janelaControle extends JFrame {
                         int itemSelecionado[][] = new int [pedidos.size()][20];
                         double [] valor = new double[pedidos.size()];
                         Calendar c = Calendar.getInstance();
-                        Date data = c.getTime(); 
-                                
+                        Date data = c.getTime();                                
                         int i = 0;
                         int j = 0;
                         int k = -1;
@@ -175,7 +175,6 @@ public class janelaControle extends JFrame {
                                 for (k = 0; k < 20; k++)
                                 {
                                     itemSelecionado[i][k] = ped.getItemSelecionado(k);
-                                    //System.out.println(itemSelecionado[i][k]);
                                 }
                                 valor[i] = ped.getValor();
                                 i++;
@@ -207,12 +206,12 @@ public class janelaControle extends JFrame {
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Não há pedidos em aberto para essa mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Não há pedidos em aberto para essa mesa.", "Selecione uma mesa com pedido.", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Você não selecionou uma mesa", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Você não selecionou uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
                     }
             }
         });
@@ -230,6 +229,31 @@ public class janelaControle extends JFrame {
                                cardapio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                            }
                 });
+            }
+        });
+        
+        excluirPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Mesas selecionado = lstMesas.getSelectedValue();
+                Pedidos selecionado2 = lstPedidos.getSelectedValue();
+                if (selecionado != null && selecionado2 != null)
+                {
+                    selecionado.getPedidos().remove(selecionado2);
+                    lstMesas.clearSelection();
+                    lstPedidos.clearSelection();
+                    lstMesas.updateUI();
+                    lstPedidos.updateUI();
+                }
+                else if (selecionado == null)
+                {
+                    JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um pedido.", "Selecione um pedido.", JOptionPane.INFORMATION_MESSAGE);
+                }
+                    
             }
         });
         

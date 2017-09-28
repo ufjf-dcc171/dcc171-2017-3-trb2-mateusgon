@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 public class janelaPedidos extends JFrame{
 
+    private Boolean confirmacao = true;
     private Boolean fechar = false;
     private Pedidos pedido;
     private SampleDataPedidos pedido3 = new SampleDataPedidos();
@@ -60,6 +61,7 @@ public class janelaPedidos extends JFrame{
     public janelaPedidos() throws HeadlessException {
         super("Cardápio para Pedidos");
         setMinimumSize(new Dimension(534, 400));
+        setPreferredSize(new Dimension(534, 400));
         add(layouts, BorderLayout.NORTH);
         add(temp, BorderLayout.CENTER);
         for (int i = 0; i < 20; i++)
@@ -167,42 +169,53 @@ public class janelaPedidos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean possuiProdutos = false;
-                int j[] = new int[20];
-                for (int i = 0; i < 20; i++)
+                if (confirmacao)
                 {
-                    if (!"".equals(quantidade[i].getText()))
+                    int j[] = new int[20];
+                    for (int i = 0; i < 20; i++)
                     {
-                        j[i] = parseInt(quantidade[i].getText());
-                        possuiProdutos = true;
-                    }    
-                    else
-                        j[i] = 0;
-                }
-                pedido = new Pedidos();
-                SampleDataPedidos sp1 = new SampleDataPedidos();
-                pedido = sp1.getPedido();
-                for (int i = 0; i < 20; i++)
-                {
-                    if (j[i] != 0)
-                    {
-                        double valor;
-                        pedido.setValorItemIndividual((valor = pedido.getValorItemPosicao(i) * j[i]), i);
-                        pedido.setValor(valor);
+                        if (!"".equals(quantidade[i].getText()))
+                        {
+                            j[i] = parseInt(quantidade[i].getText());
+                            possuiProdutos = true;
+                        }    
+                        else
+                            j[i] = 0;
                     }
-                }
-                Calendar c = Calendar.getInstance();
-                Date data = c.getTime();
-                pedido.setAberto(data);
-                pedido.setItemSelecionado(j);
-                if (possuiProdutos)
-                {
-                    fechar = true;
-                    JOptionPane.showMessageDialog(null, "Pedido feito e computado\n" + "Valor Total: R$" + pedido.getValor() + "\n" + "Realizado na hora: " + pedido.getAberto(), "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    pedido = new Pedidos();
+                    SampleDataPedidos sp1 = new SampleDataPedidos();
+                    pedido = sp1.getPedido();
+                    for (int i = 0; i < 20; i++)
+                    {
+                        if (j[i] != 0)
+                        {
+                            double valor;
+                            pedido.setValorItemIndividual((valor = pedido.getValorItemPosicao(i) * j[i]), i);
+                            pedido.setValor(valor);
+                        }
+                    }
+                    Calendar c = Calendar.getInstance();
+                    Date data = c.getTime();
+                    pedido.setAberto(data);
+                    pedido.setItemSelecionado(j);
+                    if (possuiProdutos)
+                    {
+                        pedido.setAberto(data);
+                        pedido.setItemSelecionado(j);
+                        fechar = true;
+                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + pedido.getValor() + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                    }
+                    confirmacao = false;
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                    JOptionPane.showMessageDialog(null, "O pedido já foi realizado!\n Encerre o cardápio no 'X'.\n Caso tenha feito o pedido errado, exclua-o na tela em seguida", "Você já confirmou seu pedido", JOptionPane.INFORMATION_MESSAGE);
                 }
+                    
             }
         });        
     }
