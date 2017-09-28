@@ -196,13 +196,11 @@ public class janelaControle extends JFrame {
                                 conta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
                             });
-                            
-                            mesas.remove(lstMesas.getSelectedValue());
+                            selecionado.getPedidos().removeAll(pedidos);
                             lstMesas.clearSelection();
+                            lstPedidos.clearSelection();
                             lstMesas.updateUI();
-                            Mesas m = new Mesas("Mesa " + numero, numero);
-                            mesas.add(m);
-                            lstMesas.updateUI();
+                            lstPedidos.updateUI();
                         }
                         else
                         {
