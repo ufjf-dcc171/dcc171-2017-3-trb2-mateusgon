@@ -20,11 +20,14 @@ public class JanelaPrincipal extends JFrame{
     private final JButton administrarItem = new JButton("Administre seus itens");
     private final JButton administrarFuncionamento = new JButton("Administre o funcionamento");
     private SampleDataItem sdi;
+    private List<Mesas> mesas = new ArrayList<>();
     
     public JanelaPrincipal() throws HeadlessException {
         super("Pizzaria Petini");
         
         sdi = new SampleDataItem();
+        Mesas mesa = new Mesas("Mesa 0", 0);
+        mesas.add(mesa);
         
         setMinimumSize(new Dimension(600, 325));
         setPreferredSize(new Dimension(600, 325));
@@ -38,7 +41,7 @@ public class JanelaPrincipal extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JanelaControleItem inicio = new JanelaControleItem(sdi);
-                inicio.setSize(730, 600);
+                inicio.setSize(650, 350);
                 inicio.setLocationRelativeTo(null);
                 inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 inicio.setVisible(true); 
@@ -54,23 +57,28 @@ public class JanelaPrincipal extends JFrame{
         administrarFuncionamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                getSampleData();
                 JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(getSampleData(), sdi);
                 inicio.setSize(730, 600);
                 inicio.setLocationRelativeTo(null);
-                inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                inicio.setVisible(true); 
+                inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                inicio.setVisible(true);
+                inicio.addWindowListener(new WindowAdapter() {
+                @Override
+                           public void windowClosing(WindowEvent evt) {
+                               inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                               mesas = inicio.getMesas();
+                           }
+                });
             }
         });
         
        
     }
     
-    private static List<Mesas> getSampleData()
+    private List<Mesas> getSampleData()
     {
-            Mesas m1 = new Mesas("Mesa 0", 0);
-            List<Mesas> mesas = new ArrayList<>();
-            mesas.add(m1);
-            return mesas;    
+            return this.mesas;    
     }
         
 }

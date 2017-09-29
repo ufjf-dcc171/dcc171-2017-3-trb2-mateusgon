@@ -288,5 +288,10 @@ public class JanelaControleFuncionamento extends JFrame {
                         }
                     }
         });   
-    }    
+    }  
+    
+    public List<Mesas> getMesas()
+    {
+        return this.mesas;
+    }
 }
