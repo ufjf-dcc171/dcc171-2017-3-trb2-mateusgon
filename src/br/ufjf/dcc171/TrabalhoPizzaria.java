@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 public class TrabalhoPizzaria {
 
     public static void main(String[] args) {
-        JanelaControle inicio = new JanelaControle(getSampleData());
+        JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(getSampleData());
         inicio.setSize(730, 600);
         inicio.setLocationRelativeTo(null);
         inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
