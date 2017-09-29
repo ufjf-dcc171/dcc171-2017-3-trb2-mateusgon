@@ -39,7 +39,7 @@ public class JanelaControleFuncionamento extends JFrame {
         private final JButton totalFaturado = new JButton("Total Faturado");
         private final JButton verPedido = new JButton("Ver Pedido");
     
-    public JanelaControleFuncionamento(List<Mesas> sampleData) throws HeadlessException {
+    public JanelaControleFuncionamento(List<Mesas> sampleData, SampleDataItem sdi) throws HeadlessException {
         super("Controle de Pedidos");
         setPreferredSize(new Dimension(730, 600));
         setMinimumSize(new Dimension(500, 400));
@@ -50,8 +50,6 @@ public class JanelaControleFuncionamento extends JFrame {
         
         lstMesas.setPreferredSize(new Dimension(200, 200));
         lstPedidos.setPreferredSize(new Dimension(500, 200));
-        
-        SampleDataItem sdi = new SampleDataItem();
         
         JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);

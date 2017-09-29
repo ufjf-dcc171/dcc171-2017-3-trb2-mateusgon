@@ -22,7 +22,7 @@ public class JanelaCardapio extends JFrame {
         super("Cardápio para Pedidos");
         setMinimumSize(new Dimension(534, 400));
         setPreferredSize(new Dimension(700, 400));
-        textosJLabels = new JLabel[sdi.getItem().length];
+        textosJLabels = new JLabel[sdi.getItem().size()];
         add(layouts, BorderLayout.NORTH);
         add(janelaCardapio, BorderLayout.CENTER);        
         layouts.addActionListener(new ActionListener() {
@@ -56,7 +56,7 @@ public class JanelaCardapio extends JFrame {
             }
             private void configuraPizzasSalgadas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Salgada".equals(sdi.getTipo(i)))
                     {
@@ -69,7 +69,7 @@ public class JanelaCardapio extends JFrame {
 
             private void configuraPizzasDoces() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Doce".equals(sdi.getTipo(i)))
                     {
@@ -82,7 +82,7 @@ public class JanelaCardapio extends JFrame {
 
             private void configuraSobremesas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Sobremesa".equals(sdi.getTipo(i)))
                     {
@@ -95,7 +95,7 @@ public class JanelaCardapio extends JFrame {
 
             private void configuraBebidas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Bebida".equals(sdi.getTipo(i)))
                     {

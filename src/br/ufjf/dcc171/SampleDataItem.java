@@ -1,9 +1,17 @@
 package br.ufjf.dcc171;
 
+import java.util.ArrayList;
+
 public class SampleDataItem {
-    private Item []item = new Item[20];
+    private ArrayList<Item> item;
 
     public SampleDataItem() {
+        item = new ArrayList<Item>();
+        adicionaItem(item);
+    }
+
+    private void adicionaItem(ArrayList<Item> itemList) {
+        Item item[] = new Item[20];
         item[0] = new Item("Pepperoni (Pepperoni e Manjericão)", "Pizza Salgada", 42.90);
         item[1] = new Item("Champignon (Champignon e Azeitona Preta)", "Pizza Salgada", 40.90);
         item[2] = new Item("Pizza Ao Alho (Alho torrado e azeite)", "Pizza Salgada", 40.90);
@@ -24,24 +32,31 @@ public class SampleDataItem {
         item[17] = new Item("Refrigerante 1,5lts", "Bebida", 10.00);
         item[18] = new Item("Suco Copo 500ml", "Bebida", 5.00);
         item[19] = new Item("Cerveja Long Neck", "Bebida", 7.00);
+        for (int i = 0; i < 20; i++)
+        {
+            itemList.add(item[i]);
+        }
     }
-
-    public Item[] getItem() {
+    
+    public ArrayList<Item> getItem() {
         return item;
     }
     
     public String getTipo (int i)
     {
-        return item[i].getTipoItem();
+        Item f = item.get(i);        
+        return f.getTipoItem();
     }
     
     public String nomeValor (int i)
     {
-        return item[i].toString();
+        Item f = item.get(i);
+        return f.getNome() + " - R$" + f.getValor();
     }
     
     public Item getItemPosicao(int i)
     {
-        return item[i];
+        Item f = item.get(i);
+        return f;
     }
 }

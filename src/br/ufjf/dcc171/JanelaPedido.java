@@ -37,11 +37,11 @@ public class JanelaPedido extends JFrame{
         super("Cardápio para Pedidos");
         setMinimumSize(new Dimension(534, 400));
         setPreferredSize(new Dimension(700, 400));
-        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().length];
-        textosJLabels = new JLabel[sdi.getItem().length];
+        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().size()];
+        textosJLabels = new JLabel[sdi.getItem().size()];
         add(layouts, BorderLayout.NORTH);
         add(janelaPedido, BorderLayout.CENTER);
-        for (int i = 0; i < sdi.getItem().length; i++)
+        for (int i = 0; i < sdi.getItem().size(); i++)
         {
             espacosJextFieldNumeros[i] = new JtextFieldSomenteNumeros();
         }
@@ -78,7 +78,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraPizzasSalgadas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Salgada".equals(sdi.getTipo(i)))
                     {
@@ -93,7 +93,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraPizzasDoces() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Doce".equals(sdi.getTipo(i)))
                     {
@@ -108,7 +108,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraSobremesas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Sobremesa".equals(sdi.getTipo(i)))
                     {
@@ -123,7 +123,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraBebidas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Bebida".equals(sdi.getTipo(i)))
                     {
@@ -142,10 +142,10 @@ public class JanelaPedido extends JFrame{
                 boolean possuiProdutos = false;
                 if (confirmarNaoApertado)
                 {
-                    int j[] = new int[sdi.getItem().length];
+                    int j[] = new int[sdi.getItem().size()];
                     int i = 0;
                     int cont = 0;
-                    for (i = 0; i < sdi.getItem().length; i++)
+                    for (i = 0; i < sdi.getItem().size(); i++)
                     {
                         if (!"".equals(espacosJextFieldNumeros[i].getText()))
                         {
@@ -161,7 +161,7 @@ public class JanelaPedido extends JFrame{
                     pedido = new Pedido();
                     ItemDoPedido [] idp = new ItemDoPedido[cont];
                     cont = 0;
-                    for (i = 0; i < sdi.getItem().length; i++)
+                    for (i = 0; i < sdi.getItem().size(); i++)
                     {
                         if (j[i] != 0)
                         {
@@ -199,11 +199,11 @@ public class JanelaPedido extends JFrame{
         super("Cardápio para Pedidos");
         setMinimumSize(new Dimension(534, 400));
         setPreferredSize(new Dimension(700, 400));
-        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().length];
-        textosJLabels = new JLabel[sdi.getItem().length];
+        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().size()];
+        textosJLabels = new JLabel[sdi.getItem().size()];
         add(layouts, BorderLayout.NORTH);
         add(janelaPedido, BorderLayout.CENTER);
-        for (int i = 0; i < sdi.getItem().length; i++)
+        for (int i = 0; i < sdi.getItem().size(); i++)
         {
             espacosJextFieldNumeros[i] = new JtextFieldSomenteNumeros();
         }
@@ -240,7 +240,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraPizzasSalgadas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Salgada".equals(sdi.getTipo(i)))
                     {
@@ -255,7 +255,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraPizzasDoces() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Pizza Doce".equals(sdi.getTipo(i)))
                     {
@@ -270,7 +270,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraSobremesas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Sobremesa".equals(sdi.getTipo(i)))
                     {
@@ -285,7 +285,7 @@ public class JanelaPedido extends JFrame{
 
             private void configuraBebidas() {
                 Box vertical = Box.createVerticalBox();
-                for (int i = 0; i < sdi.getItem().length; i++)
+                for (int i = 0; i < sdi.getItem().size(); i++)
                 {
                     if ("Bebida".equals(sdi.getTipo(i)))
                     {
@@ -304,10 +304,10 @@ public class JanelaPedido extends JFrame{
                 boolean possuiProdutos = false;
                 if (confirmarNaoApertado)
                 {
-                    int j[] = new int[sdi.getItem().length];
+                    int j[] = new int[sdi.getItem().size()];
                     int i = 0;
                     int cont = 0;
-                    for (i = 0; i < sdi.getItem().length; i++)
+                    for (i = 0; i < sdi.getItem().size(); i++)
                     {
                         if (!"".equals(espacosJextFieldNumeros[i].getText()))
                         {
@@ -322,7 +322,7 @@ public class JanelaPedido extends JFrame{
                     }
                     ItemDoPedido [] idp = new ItemDoPedido[cont];
                     cont = 0;
-                    for (i = 0; i < sdi.getItem().length; i++)
+                    for (i = 0; i < sdi.getItem().size(); i++)
                     {
                         if (j[i] != 0)
                         {
