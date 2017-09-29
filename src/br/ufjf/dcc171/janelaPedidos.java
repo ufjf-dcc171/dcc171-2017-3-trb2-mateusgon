@@ -25,7 +25,7 @@ public class janelaPedidos extends JFrame{
     private Boolean confirmacao = true;
     private Boolean fechar = false;
     private Pedidos pedido;
-    private SampleDataPedidos pedido3 = new SampleDataPedidos();
+    private Item pedido3 = new Item();
     
     private final JPanel temp = new JPanel();
     private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Pizzas Salgadas", "Pizzas Doces", "Sobremesas", "Bebidas"});
@@ -77,28 +77,25 @@ public class janelaPedidos extends JFrame{
                         temp.removeAll();
                         temp.updateUI();
                         configuraPizzasSalgadas();
-                        pack(); 
                         break;
                         
                     case 1:
                         temp.removeAll();
                         temp.updateUI();
                         configuraPizzasDoces();
-                        pack();
                         break;
                     case 2:
                         temp.removeAll();
                         temp.updateUI();
-                        configuraSobremesas();
-                        pack();
+                        configuraSobremesas();;
                         break;
                     case 3:
                         temp.removeAll();
                         temp.updateUI();
                         configuraBebidas();
-                        pack();
                         break;
                 }
+                
             }
 
             private void configuraPizzasSalgadas() {
@@ -183,7 +180,7 @@ public class janelaPedidos extends JFrame{
                             j[i] = 0;
                     }
                     pedido = new Pedidos();
-                    SampleDataPedidos sp1 = new SampleDataPedidos();
+                    Item sp1 = new Item();
                     pedido = sp1.getPedido();
                     for (int i = 0; i < 20; i++)
                     {
@@ -217,7 +214,8 @@ public class janelaPedidos extends JFrame{
                 }
                     
             }
-        });        
+        });   
+        layouts.setSelectedIndex(0);
     }
     
     Pedidos pedidoSelecionado (String nome)

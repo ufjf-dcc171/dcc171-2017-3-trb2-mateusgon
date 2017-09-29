@@ -14,7 +14,7 @@ public class JanelaConta extends JFrame{
     private JPanel temp = new JPanel();
     private int j=0;
     private int m=0;
-    private final SampleDataPedidos pedido3 = new SampleDataPedidos();
+    private final Item pedido3 = new Item();
     private final JLabel[] labels;
     private int posicaoLables = 0;
     private double valorFinalConta=0;

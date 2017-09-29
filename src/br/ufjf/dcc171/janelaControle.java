@@ -36,6 +36,8 @@ public class janelaControle extends JFrame {
         private final JButton fecharConta = new JButton("Fechar Conta");
         private final JButton verCardapio = new JButton("Ver Cardapio");
         private final JButton excluirPedido = new JButton("Excluir Pedido");
+        private final JButton pedidosFechados = new JButton("Pedidos Fechados");
+        private final JButton valorTotalVenda = new JButton("Valor Funcionamento");
     
     public janelaControle(List<Mesas> sampleData) throws HeadlessException {
         super("Controle de Pedidos");
@@ -52,9 +54,11 @@ public class janelaControle extends JFrame {
         botoes.add(adicionarMesa);
         botoes.add(realizarPedido);
         botoes.add(verCardapio);
+        botoes.add(pedidosFechados);
         botoes.add(excluirMesa);
         botoes.add(excluirPedido);
         botoes.add(fecharConta);
+        botoes.add(valorTotalVenda);
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
         add(new JScrollPane(lstPedidos), BorderLayout.CENTER);
@@ -94,7 +98,7 @@ public class janelaControle extends JFrame {
                            public void windowClosing(WindowEvent evt) {
                                    if (pedidos.getFechar())
                                    {
-                                       Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
+                                            Pedidos p1 = pedidos.pedidoSelecionado("Pedido " + contadorPedidos);
                                             contadorPedidos++;
                                             lstMesas.getSelectedValue().getPedidos().add(p1);
                                             lstPedidos.updateUI();

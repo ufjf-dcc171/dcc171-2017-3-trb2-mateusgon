@@ -1,6 +1,6 @@
 package br.ufjf.dcc171;
 
-public class SampleDataPedidos {
+public class Item {
 
     private final Pedidos p1;
     private String nome;
@@ -12,7 +12,7 @@ public class SampleDataPedidos {
     5.0, 13.0, 10.0, 9.0, 6.0, 10.0, 5.0, 7.0};
     private final boolean statusDoPedidoAberto = true;
     
-    public SampleDataPedidos() {
+    public Item() {
         p1 = new Pedidos();
         this.p1.setItem(itemNome);
         this.p1.setValorItem(valorItem);

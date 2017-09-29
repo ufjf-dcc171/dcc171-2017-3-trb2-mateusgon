@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class JanelaCardapio extends JFrame {
     
-    private SampleDataPedidos pedido3 = new SampleDataPedidos();
+    private Item pedido3 = new Item();
     private final JPanel temp = new JPanel();
     private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Pizzas Salgadas", "Pizzas Doces", "Sobremesas", "Bebidas"});
    

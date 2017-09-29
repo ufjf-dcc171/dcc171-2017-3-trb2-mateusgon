@@ -3,15 +3,13 @@ package br.ufjf.dcc171;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Pedidos {
 
     private String nome;
-    private String item[];
-    private double valorItem[];
-    private int itemSelecionado[];
+    private List<Item> item;
     private boolean status;
-    private double valor;
     private Date aberto;
     private Date fechado;
 
