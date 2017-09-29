@@ -6,7 +6,7 @@ import java.util.List;
 public class Mesas {
     private Integer numero;
     private String nome;
-    private List <Pedidos> pedidos;
+    private List <Pedido> pedidos;
 
     public Mesas() {
     }
@@ -25,11 +25,11 @@ public class Mesas {
         this.nome = nome;
     }
 
-    public List <Pedidos> getPedidos() {
+    public List <Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List <Pedidos> pedidos) {
+    public void setPedidos(List <Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 

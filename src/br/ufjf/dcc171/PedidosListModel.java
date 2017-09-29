@@ -5,12 +5,12 @@ import java.util.List;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
-public class PedidosListModel implements ListModel<Pedidos> {
+public class PedidosListModel implements ListModel<Pedido> {
 
-    private final List<Pedidos> pedidos;
+    private final List<Pedido> pedidos;
     private final List<ListDataListener> dataListener;
 
-    public PedidosListModel(List<Pedidos> pedidos) {
+    public PedidosListModel(List<Pedido> pedidos) {
         this.pedidos = pedidos;
         this.dataListener = new ArrayList<>();
     }
@@ -21,7 +21,7 @@ public class PedidosListModel implements ListModel<Pedidos> {
     }
 
     @Override
-    public Pedidos getElementAt(int index) {
+    public Pedido getElementAt(int index) {
         return pedidos.get(index);
     }
 

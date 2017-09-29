@@ -30,10 +30,10 @@ public class JanelaConta extends JFrame{
             {
                 if (itemSelecionado[j][m] != 0)
                 {
-                    labels[posicaoLables] = new JLabel(pedido3.toString(m, itemSelecionado[j][m]));
+    /*                labels[posicaoLables] = new JLabel(pedido3.toString(m, itemSelecionado[j][m]));
                     System.out.println(pedido3.toString(m, itemSelecionado[j][m]));
                     posicaoLables++;
-                }
+    */            }
             }
         }
         for (int a = 0; a < posicaoLables; a++)

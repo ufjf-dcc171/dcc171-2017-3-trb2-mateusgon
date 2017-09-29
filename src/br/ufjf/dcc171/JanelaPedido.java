@@ -1,0 +1,375 @@
+package br.ufjf.dcc171;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+public class JanelaPedido extends JFrame{
+  
+    private boolean confirmarNaoApertado = true;
+    private boolean fecharJanelaAutorizado = false;
+    private Pedido pedido;
+    private final JPanel janelaPedido = new JPanel();
+    private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Pizzas Salgadas", "Pizzas Doces", "Sobremesas", "Bebidas"});      
+    private final JtextFieldSomenteNumeros [] espacosJextFieldNumeros; 
+    private final JLabel [] textosJLabels;
+    private final JButton confirmar = new JButton("Confirmar");
+    
+    public JanelaPedido(SampleDataItem sdi) throws HeadlessException {
+        super("Cardápio para Pedidos");
+        setMinimumSize(new Dimension(534, 400));
+        setPreferredSize(new Dimension(700, 400));
+        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().length];
+        textosJLabels = new JLabel[sdi.getItem().length];
+        add(layouts, BorderLayout.NORTH);
+        add(janelaPedido, BorderLayout.CENTER);
+        for (int i = 0; i < sdi.getItem().length; i++)
+        {
+            espacosJextFieldNumeros[i] = new JtextFieldSomenteNumeros();
+        }
+        
+        layouts.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch(layouts.getSelectedIndex())
+                {
+                    case 0:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraPizzasSalgadas();
+                        break;
+                        
+                    case 1:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraPizzasDoces();
+                        break;
+                    case 2:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraSobremesas();;
+                        break;
+                    case 3:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraBebidas();
+                        break;
+                }
+                
+            }
+
+            private void configuraPizzasSalgadas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Pizza Salgada".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraPizzasDoces() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Pizza Doce".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }
+               }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraSobremesas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Sobremesa".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraBebidas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Bebida".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+        });
+     confirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean possuiProdutos = false;
+                if (confirmarNaoApertado)
+                {
+                    int j[] = new int[sdi.getItem().length];
+                    int i = 0;
+                    int cont = 0;
+                    for (i = 0; i < sdi.getItem().length; i++)
+                    {
+                        if (!"".equals(espacosJextFieldNumeros[i].getText()))
+                        {
+                            j[i] = parseInt(espacosJextFieldNumeros[i].getText());
+                            cont++;
+                            possuiProdutos = true;
+                        }
+                        else
+                        {
+                            j[i] = 0;
+                        }
+                    }
+                    pedido = new Pedido();
+                    ItemDoPedido [] idp = new ItemDoPedido[cont];
+                    cont = 0;
+                    for (i = 0; i < sdi.getItem().length; i++)
+                    {
+                        if (j[i] != 0)
+                        {
+                            idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
+                            pedido.getItemDoPedido().add(idp[cont]);
+                            cont++;
+                        }
+                    }
+                    Calendar c = Calendar.getInstance();
+                    Date data = c.getTime();
+                    if (possuiProdutos)
+                    {
+                        pedido.setAberto(data);
+                        pedido.setStatusAberto(true);
+                        fecharJanelaAutorizado = true;
+                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + pedido.getValor() + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                    }
+                    confirmarNaoApertado = false;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "O pedido já foi realizado!\n Encerre o cardápio no 'X'.\n Caso tenha feito o pedido errado, exclua-o na tela em seguida", "Você já confirmou seu pedido", JOptionPane.INFORMATION_MESSAGE);
+                }
+                    
+            }
+        });   
+        layouts.setSelectedIndex(0);
+    }
+
+    public JanelaPedido(Pedido ped, SampleDataItem sdi) throws HeadlessException {
+        super("Cardápio para Pedidos");
+        setMinimumSize(new Dimension(534, 400));
+        setPreferredSize(new Dimension(700, 400));
+        espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().length];
+        textosJLabels = new JLabel[sdi.getItem().length];
+        add(layouts, BorderLayout.NORTH);
+        add(janelaPedido, BorderLayout.CENTER);
+        for (int i = 0; i < sdi.getItem().length; i++)
+        {
+            espacosJextFieldNumeros[i] = new JtextFieldSomenteNumeros();
+        }
+        
+        layouts.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch(layouts.getSelectedIndex())
+                {
+                    case 0:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraPizzasSalgadas();
+                        break;
+                        
+                    case 1:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraPizzasDoces();
+                        break;
+                    case 2:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraSobremesas();;
+                        break;
+                    case 3:
+                        janelaPedido.removeAll();
+                        janelaPedido.updateUI();
+                        configuraBebidas();
+                        break;
+                }
+                
+            }
+
+            private void configuraPizzasSalgadas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Pizza Salgada".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraPizzasDoces() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Pizza Doce".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }
+               }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraSobremesas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Sobremesa".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+
+            private void configuraBebidas() {
+                Box vertical = Box.createVerticalBox();
+                for (int i = 0; i < sdi.getItem().length; i++)
+                {
+                    if ("Bebida".equals(sdi.getTipo(i)))
+                    {
+                        textosJLabels[i] = new JLabel(sdi.nomeValor(i));
+                        vertical.add(textosJLabels[i]);
+                        vertical.add(espacosJextFieldNumeros[i]);
+                    }               
+                }
+                vertical.add(confirmar);
+                janelaPedido.add(vertical);
+            }
+        });
+     confirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean possuiProdutos = false;
+                if (confirmarNaoApertado)
+                {
+                    int j[] = new int[sdi.getItem().length];
+                    int i = 0;
+                    int cont = 0;
+                    for (i = 0; i < sdi.getItem().length; i++)
+                    {
+                        if (!"".equals(espacosJextFieldNumeros[i].getText()))
+                        {
+                            j[i] = parseInt(espacosJextFieldNumeros[i].getText());
+                            cont++;
+                            possuiProdutos = true;
+                        }
+                        else
+                        {
+                            j[i] = 0;
+                        }
+                    }
+                    ItemDoPedido [] idp = new ItemDoPedido[cont];
+                    cont = 0;
+                    for (i = 0; i < sdi.getItem().length; i++)
+                    {
+                        if (j[i] != 0)
+                        {
+                            idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
+                            ped.getItemDoPedido().add(idp[cont]);
+                            cont++;
+                        }
+                    }
+                    Calendar c = Calendar.getInstance();
+                    Date data = c.getTime();
+                    if (possuiProdutos)
+                    {
+                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + ped.getValor() + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                        fecharJanelaAutorizado = true;
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Seu pedido está só com itens do outro pedido, realize-o, por-favor");
+                    }
+                    confirmarNaoApertado = false;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "O pedido já foi realizado!\n Encerre o cardápio no 'X'.\n Caso tenha feito o pedido errado, exclua-o na tela em seguida", "Você já confirmou seu pedido", JOptionPane.INFORMATION_MESSAGE);
+                }
+                    
+            }
+        });   
+        layouts.setSelectedIndex(0);
+    }
+    
+    Pedido pedidoSelecionado (String nome)
+        {  
+            if(nome == null)
+                return null;
+            else
+            {
+                pedido.setNome(nome);
+                return this.pedido;
+            }
+            
+        }
+
+    public Boolean getFechar() {
+        return fecharJanelaAutorizado;
+    }
+    
+    
+
+}
