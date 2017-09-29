@@ -331,8 +331,6 @@ public class JanelaPedido extends JFrame{
                             cont++;
                         }
                     }
-                    Calendar c = Calendar.getInstance();
-                    Date data = c.getTime();
                     if (possuiProdutos)
                     {
                         JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + ped.getValor() + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);

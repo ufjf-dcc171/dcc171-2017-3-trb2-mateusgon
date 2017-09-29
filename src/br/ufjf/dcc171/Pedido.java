@@ -78,5 +78,13 @@ public class Pedido {
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        if (isStatusAberto())
+            return this.nome + " - R$" + this.valor + " - Aberto: " + this.aberto + " - Status: Aberto";
+        else
+            return this.nome + " - R$" + this.valor + " - Fechado: " + this.fechado + " - Status: Fechado";
+    }
+
     
 }
