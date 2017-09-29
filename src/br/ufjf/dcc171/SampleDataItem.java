@@ -59,4 +59,10 @@ public class SampleDataItem {
         Item f = item.get(i);
         return f;
     }
+    
+    public void setItem(ArrayList<Item> item) {
+        this.item = item;
+    }
+    
+    
 }

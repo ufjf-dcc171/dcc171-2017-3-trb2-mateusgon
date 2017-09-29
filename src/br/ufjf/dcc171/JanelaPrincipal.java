@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -17,7 +19,7 @@ public class JanelaPrincipal extends JFrame{
     private final JPanel inicio = new JPanel();
     private final JButton administrarItem = new JButton("Administre seus itens");
     private final JButton administrarFuncionamento = new JButton("Administre o funcionamento");
-    private final SampleDataItem sdi;
+    private SampleDataItem sdi;
     
     public JanelaPrincipal() throws HeadlessException {
         super("Pizzaria Petini");
@@ -40,6 +42,13 @@ public class JanelaPrincipal extends JFrame{
                 inicio.setLocationRelativeTo(null);
                 inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 inicio.setVisible(true); 
+                inicio.addWindowListener(new WindowAdapter() {
+                @Override
+                           public void windowClosing(WindowEvent evt) {
+                               inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                               sdi = inicio.getItem();
+                           }
+                });
             }
         });
         administrarFuncionamento.addActionListener(new ActionListener() {

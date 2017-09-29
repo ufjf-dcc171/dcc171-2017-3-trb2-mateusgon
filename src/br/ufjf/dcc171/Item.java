@@ -40,6 +40,10 @@ public class Item {
     public void setValor(Double valor) {
         this.valor = valor;
     }
+
+    public void setTipoItem(String tipoItem) {
+        this.tipoItem = tipoItem;
+    }
     
     
     
