@@ -28,7 +28,7 @@ public class JanelaControleItem extends JFrame{
 
     private final Item modificado;
     private final SampleDataItem item;
-    private String TipoItem;
+    private String TipoItem = null;
     private JPanel janelaItem = new JPanel();
     private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Adicionar", "Alterar", "Remover"});  
     
@@ -111,12 +111,32 @@ public class JanelaControleItem extends JFrame{
                 confirmar.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Item novo = new Item();
-                        novo.setNome(texto[0].getText());
-                        novo.setTipoItem(TipoItem);
-                        Double valor = Double.parseDouble(texto[1].getText());
-                        novo.setValor(valor);
-                        sdi.getItem().add(novo);
+                        if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null))
+                        {    
+                            Item novo = new Item();
+                            novo.setNome(texto[0].getText());
+                            novo.setTipoItem(TipoItem);
+                            try {   
+                                Double valor = Double.parseDouble(texto[1].getText());
+                                if (valor != 0)
+                                {
+                                    novo.setValor(valor);
+                                    sdi.getItem().add(novo);
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            }   
+                            catch (NumberFormatException ex)
+                            {
+                                JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
+                        }    
                     }
                 });
                 
@@ -139,7 +159,7 @@ public class JanelaControleItem extends JFrame{
                    {
                        int i = sdi.getItem().indexOf(selecionado);
                        JanelaControleItem modific = new JanelaControleItem(sdi.getItem().get(i));
-                       modific.setSize(150, 150);
+                       modific.setSize(600, 150);
                        modific.setLocationRelativeTo(null);
                        modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                        modific.setVisible(true);
@@ -191,6 +211,7 @@ public class JanelaControleItem extends JFrame{
             });
          }
         });
+        layouts.setSelectedIndex(0);
     }
         
     public SampleDataItem getItem() {
@@ -268,15 +289,26 @@ public class JanelaControleItem extends JFrame{
         confirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getModificado().setNome(texto[0].getText());
-                getModificado().setTipoItem(TipoItem);
-                Double valor = Double.parseDouble(texto[1].getText());
-                getModificado().setValor(valor);               
+                if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null)) {
+                    getModificado().setNome(texto[0].getText());
+                    getModificado().setTipoItem(TipoItem);
+                    try {
+                        Double valor = Double.parseDouble(texto[1].getText());
+                        if (valor != 0) {
+                            getModificado().setValor(valor);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
+        layouts.setSelectedIndex(0);
 
-}
-    
-    
-    
+    }
+
 }

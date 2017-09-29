@@ -15,7 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
-
+    
+    private boolean abrirJanela = true;
     private final JPanel inicio = new JPanel();
     private final JButton administrarItem = new JButton("Administre seus itens");
     private final JButton administrarFuncionamento = new JButton("Administre o funcionamento");
@@ -40,45 +41,56 @@ public class JanelaPrincipal extends JFrame{
         administrarItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaControleItem inicio = new JanelaControleItem(sdi);
-                inicio.setSize(650, 350);
-                inicio.setLocationRelativeTo(null);
-                inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                inicio.setVisible(true); 
-                inicio.addWindowListener(new WindowAdapter() {
-                @Override
-                           public void windowClosing(WindowEvent evt) {
-                               inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                               sdi = inicio.getItem();
-                           }
-                });
+                if(abrirJanela)
+                {
+                    abrirJanela = false;
+                    JanelaControleItem inicio = new JanelaControleItem(sdi);
+                    inicio.setSize(650, 350);
+                    inicio.setLocationRelativeTo(null);
+                    inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    inicio.setVisible(true); 
+                    inicio.addWindowListener(new WindowAdapter() {
+                    @Override
+                               public void windowClosing(WindowEvent evt) {
+                                   inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                   sdi = inicio.getItem();
+                                   abrirJanela = true;
+                               }
+                    });
+                }
+                else
+                {
+                    
+                }
             }
         });
         administrarFuncionamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getSampleData();
-                JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(getSampleData(), sdi);
-                inicio.setSize(730, 600);
-                inicio.setLocationRelativeTo(null);
-                inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                inicio.setVisible(true);
-                inicio.addWindowListener(new WindowAdapter() {
-                @Override
-                           public void windowClosing(WindowEvent evt) {
-                               inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                               mesas = inicio.getMesas();
-                           }
-                });
+                if (abrirJanela)
+                {
+                    abrirJanela = false;
+                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi);
+                    inicio.setSize(730, 600);
+                    inicio.setLocationRelativeTo(null);
+                    inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    inicio.setVisible(true);
+                    inicio.addWindowListener(new WindowAdapter() {
+                    @Override
+                               public void windowClosing(WindowEvent evt) {
+                                   inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                   mesas = inicio.getMesas();
+                                   abrirJanela = true;
+                               }
+                    });
+                }
+                else
+                {
+                    
+                }
             }
         });
         
        
-    }
-    
-    private List<Mesas> getSampleData()
-    {
-            return this.mesas;    
-    }
-        
+    }  
 }
