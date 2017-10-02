@@ -18,7 +18,7 @@ public class JanelaListaPedido extends JFrame{
     public JanelaListaPedido(Pedido pedido) throws HeadlessException {
         super("Detalhes do pedido");
         setMinimumSize(new Dimension(534, 400));
-        labels = new JLabel[(pedido.getItemDoPedido().size() * 3) + 2];
+        labels = new JLabel[(pedido.getItemDoPedido().size() * 3) + 3];
         Box vertical = Box.createVerticalBox();
         labels[i] = new JLabel("Aberto em: " + pedido.getAberto());
         vertical.add(labels[i]);
@@ -37,13 +37,16 @@ public class JanelaListaPedido extends JFrame{
             vertical.add(labels[i]);
             i++;
         }
-        painel.add(vertical);
         if (!pedido.isStatusAberto())
         {
             labels[i] = new JLabel("Fechado em: " + pedido.getFechado());
+            i++;
+            vertical.add(labels[i]);
+            labels[i] = new JLabel("Valor total: R$" + pedido.getValor());
             vertical.add(labels[i]);
             i++;
         }
+        painel.add(vertical);
         add(new JScrollPane(painel));
     }
     

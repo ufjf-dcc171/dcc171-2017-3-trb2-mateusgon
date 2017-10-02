@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -297,7 +298,41 @@ public class JanelaControleFuncionamento extends JFrame {
                 }
             }
         });
-                
+
+        totalFaturado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (abrirJanela)
+                {
+                    abrirJanela = false;
+                    Double valor = 0.0;
+                    List<Pedido>  p = new ArrayList<>();
+                    for (Mesas m : mesas)
+                    {
+                        p = m.getPedidos();
+                        for (Pedido pedido : p)
+                        {
+                            valor = valor + pedido.getValor();
+                        }
+                    }
+                    if (valor != 0.0)
+                    {
+                        String resultado = String.format("%.2f", valor);
+                        JOptionPane.showMessageDialog(null, "O valor de funcionamento foi de: R$" + valor, "Total de Faturamento", JOptionPane.INFORMATION_MESSAGE);
+                        abrirJanela = true;
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Nenhum pedido foi feito ainda durante o funcionamento", "Nenhum pedido feito", JOptionPane.INFORMATION_MESSAGE);
+                        abrirJanela = true;
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Por favor, feche a janela aberta antes de continuar", "Já existe uma janela aberta", JOptionPane.INFORMATION_MESSAGE);
+                }             
+            }
+        });
         
         fecharConta.addActionListener(new ActionListener() {
             @Override
