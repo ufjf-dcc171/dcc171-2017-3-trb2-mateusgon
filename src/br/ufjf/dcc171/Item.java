@@ -18,7 +18,8 @@ public class Item {
 
     @Override
     public String toString() {
-        return nome + " - R$" + valor;
+        String resultado = String.format("%.2f", this.valor);
+        return nome + " - R$" + resultado;
     }
 
     public String getTipoItem() {

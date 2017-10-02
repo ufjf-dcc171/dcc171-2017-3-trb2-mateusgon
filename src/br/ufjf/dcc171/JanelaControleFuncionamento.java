@@ -24,7 +24,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class JanelaControleFuncionamento extends JFrame {
-        
+
+        private boolean abrirJanela = true;
         private int i;
         private int contadorPedidos=0;
         private final List<Mesas> mesas;
@@ -119,35 +120,50 @@ public class JanelaControleFuncionamento extends JFrame {
                 Pedido selecionado2 = lstPedidos.getSelectedValue();
                 if (selecionado == null) {
                     JOptionPane.showMessageDialog(null, "Você precisa selecionar uma mesa", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
-                } else if ((selecionado != null && selecionado2 == null) && (selecionado.getPedidos().isEmpty() || !selecionado.getPedidos().get(0).isStatusAberto())) {
-                    JanelaPedido realizarPedido = new JanelaPedido(sdi);
-                    realizarPedido.setSize(534, 400);
-                    realizarPedido.setLocationRelativeTo(null);
-                    realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    realizarPedido.setVisible(true);
-                    realizarPedido.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent evt) {
-                            if (realizarPedido.getFechar()) {
-                                Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + contadorPedidos);
-                                contadorPedidos++;
-                                lstMesas.getSelectedValue().getPedidos().add(p1);
-                                lstPedidos.updateUI();
-                                lstMesas.updateUI();
-                                realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            } else {
-                                int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
-                                if (resposta == JOptionPane.YES_OPTION) {
-                                    realizarPedido.setVisible(false);
+                } 
+                else if ((selecionado != null && selecionado2 == null) && (selecionado.getPedidos().isEmpty() || !selecionado.getPedidos().get(0).isStatusAberto())) 
+                {
+                    if (abrirJanela)
+                    {
+                        abrirJanela = false;
+                        JanelaPedido realizarPedido = new JanelaPedido(sdi);
+                        realizarPedido.setSize(534, 400);
+                        realizarPedido.setLocationRelativeTo(null);
+                        realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        realizarPedido.setVisible(true);
+                        realizarPedido.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosing(WindowEvent evt) {
+                                if (realizarPedido.getFechar()) {
+                                    Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + contadorPedidos);
+                                    contadorPedidos++;
+                                    lstMesas.getSelectedValue().getPedidos().add(p1);
+                                    lstPedidos.updateUI();
+                                    lstMesas.updateUI();
                                     realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                    abrirJanela = true;
                                 } else {
-                                    actionPerformed(e);
+                                    int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                                    if (resposta == JOptionPane.YES_OPTION) {
+                                        realizarPedido.setVisible(false);
+                                        realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                        abrirJanela = true;
+                                    } else {
+                                        abrirJanela = true;
+                                        actionPerformed(e);
+                                    }
                                 }
                             }
-                        }
-                    });
-                } else if (selecionado != null && selecionado2 != null) {
-                       if (selecionado2.isStatusAberto()) {
+                        });
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                else if (selecionado != null && selecionado2 != null) {
+                       if (selecionado2.isStatusAberto() && abrirJanela) {
+                        abrirJanela = false;
                         JanelaPedido realizarPedido = new JanelaPedido(selecionado2, sdi);
                         realizarPedido.setSize(534, 400);
                         realizarPedido.setLocationRelativeTo(null);
@@ -160,24 +176,32 @@ public class JanelaControleFuncionamento extends JFrame {
                                     lstPedidos.updateUI();
                                     lstMesas.updateUI();
                                     realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                    abrirJanela = true;
                                 } else {
                                     int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
                                     if (resposta == JOptionPane.YES_OPTION) {
                                         realizarPedido.setVisible(false);
                                         realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                        abrirJanela = true;
                                     } else {
                                         actionPerformed(e);
+                                        abrirJanela = true;
                                     }
                                 }
                             }
-                        });
-                        
-                    }
-                       else
+                        });    
+                       }
+                       else if(!selecionado2.isStatusAberto())
                        {
                            JOptionPane.showMessageDialog(null, "Você selecionou um pedido já fechado", "Pedido Fechado.", JOptionPane.INFORMATION_MESSAGE);
                        }
-                } else {
+                       else
+                       {
+                           JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                } 
+                else if (selecionado != null && selecionado2 == null)
+                {
                     JOptionPane.showMessageDialog(null, "Você deveria ter selecionado o pedido.", "Selecione um pedido.", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -211,46 +235,65 @@ public class JanelaControleFuncionamento extends JFrame {
         verCardapio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JanelaCardapio cardapio = new JanelaCardapio(sdi);
-                cardapio.setSize(534, 400);
-                cardapio.setLocationRelativeTo(null);
-                cardapio.setVisible(true);
-                cardapio.addWindowListener(new WindowAdapter() {
-                @Override
-                           public void windowClosing(WindowEvent evt) {
-                               cardapio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                           }
-                });
+                if (abrirJanela)
+                {
+                    abrirJanela = false;
+                    JanelaCardapio cardapio = new JanelaCardapio(sdi);
+                    cardapio.setSize(534, 400);
+                    cardapio.setLocationRelativeTo(null);
+                    cardapio.setVisible(true);
+                    cardapio.addWindowListener(new WindowAdapter() {
+                    @Override
+                               public void windowClosing(WindowEvent evt) {
+                                   cardapio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                   abrirJanela = true;
+                               }
+                    });
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
         
         verPedido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Mesas selecionado = lstMesas.getSelectedValue();
-                Pedido selecionado2 = lstPedidos.getSelectedValue();
-                JanelaListaPedido jlp;
-                if (selecionado != null && selecionado2 != null)
+                if (abrirJanela)
                 {
-                    jlp = new JanelaListaPedido(selecionado2);
-                    jlp.setSize(534, 400);
-                    jlp.setLocationRelativeTo(null);
-                    jlp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    jlp.setVisible(true);
-                }
-                else if (selecionado != null && selecionado.getPedidos().isEmpty())
-                {
-                    JOptionPane.showMessageDialog(null, "Não existem pedidos para essa mesa.", "Não há pedidos.", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else if (selecionado != null && selecionado2 == null)
-                {
-                    JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um pedido.", "Selecione um pedido.", JOptionPane.INFORMATION_MESSAGE);
+                    Mesas selecionado = lstMesas.getSelectedValue();
+                    Pedido selecionado2 = lstPedidos.getSelectedValue();
+                    JanelaListaPedido jlp;
+                    if (selecionado != null && selecionado2 != null)
+                    {
+                        jlp = new JanelaListaPedido(selecionado2);
+                        jlp.setSize(534, 400);
+                        jlp.setLocationRelativeTo(null);
+                        jlp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        jlp.setVisible(true);
+                        abrirJanela = true;
+                    }
+                    else if (selecionado != null && selecionado.getPedidos().isEmpty())
+                    {
+                        JOptionPane.showMessageDialog(null, "Não existem pedidos para essa mesa.", "Não há pedidos.", JOptionPane.INFORMATION_MESSAGE);
+                        abrirJanela = true;
+                    }
+                    else if (selecionado != null && selecionado2 == null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um pedido.", "Selecione um pedido.", JOptionPane.INFORMATION_MESSAGE);
+                        abrirJanela = true;
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
+                        abrirJanela = true;
+                    }    
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Você deveria ter selecionado uma mesa.", "Selecione uma mesa.", JOptionPane.INFORMATION_MESSAGE);
-                }    
-                 
+                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
                 
@@ -258,11 +301,11 @@ public class JanelaControleFuncionamento extends JFrame {
         fecharConta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int numero; 
-                Mesas selecionado = lstMesas.getSelectedValue();
-                Pedido selecionado2 = lstPedidos.getSelectedValue();
-                    if (selecionado != null && selecionado2 != null && selecionado2.isStatusAberto())
-                    {
+                if (abrirJanela) {
+                    int numero;
+                    Mesas selecionado = lstMesas.getSelectedValue();
+                    Pedido selecionado2 = lstPedidos.getSelectedValue();
+                    if (selecionado != null && selecionado2 != null && selecionado2.isStatusAberto()) {
                         JanelaConta jc = new JanelaConta(selecionado2);
                         jc.setSize(534, 400);
                         jc.setLocationRelativeTo(null);
@@ -272,22 +315,26 @@ public class JanelaControleFuncionamento extends JFrame {
                             public void windowClosing(WindowEvent evt) {
                                 jc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
-                            });                       
+                        });
                         lstMesas.clearSelection();
                         lstPedidos.clearSelection();
                         lstMesas.updateUI();
                         lstPedidos.updateUI();
-                        }
-                    else if (selecionado != null)
+                    } else if (selecionado != null && selecionado2 == null && selecionado.getPedidos().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Não há pedidos para fechar.", "Não há pedidos.", JOptionPane.INFORMATION_MESSAGE);
+                    } else if (selecionado != null && selecionado2 == null)
                     {
-                        JOptionPane.showMessageDialog(null, "Você não selecionou um pedido para fechar.", "Selecione um pedido", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Selecione um pedido para fechar.", "Selecione um pedido.", JOptionPane.INFORMATION_MESSAGE);                  
                     }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Você não selecionou uma mesa.", "Selecione uma mesa com pedido.", JOptionPane.INFORMATION_MESSAGE);
-                        }
+                      else {
+                        JOptionPane.showMessageDialog(null, "Você não selecionou uma mesa.", "Selecione uma mesa com pedido.", JOptionPane.INFORMATION_MESSAGE);
                     }
-        });   
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });  
     }  
     
     public List<Mesas> getMesas()

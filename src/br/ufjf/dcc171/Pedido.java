@@ -80,10 +80,11 @@ public class Pedido {
 
     @Override
     public String toString() {
+        String resultado = String.format("%.2f", this.valor);
         if (isStatusAberto())
-            return this.nome + " - R$" + this.valor + " - Aberto: " + this.aberto + " - Status: Aberto";
+            return this.nome + " - R$" + resultado + " - Aberto: " + this.aberto + " - Status: Aberto";
         else
-            return this.nome + " - R$" + this.valor + " - Fechado: " + this.fechado + " - Status: Fechado";
+            return this.nome + " - R$" + resultado + " - Fechado: " + this.fechado + " - Status: Fechado";
     }
 
     

@@ -20,6 +20,8 @@ public class JanelaConta extends JFrame{
     
     public JanelaConta(Pedido pedido) {
         super("Conta");
+        String [] a = new String[pedido.getItemDoPedido().size()];
+        int contA = 0;
         setMinimumSize(new Dimension(534, 400));
         labels = new JLabel[(pedido.getItemDoPedido().size() * 3) + 3];
         Box vertical = Box.createVerticalBox();
@@ -36,7 +38,10 @@ public class JanelaConta extends JFrame{
             labels[i] = new JLabel("Quantidade: " + item.getQuantidade());
             vertical.add(labels[i]);
             i++;
-            labels[i] = new JLabel("O valor individual é: R$" + item.getItem().getValor());
+            a[contA] = new String();
+            a[contA] = String.format("%.2f", item.getItem().getValor()); 
+            labels[i] = new JLabel("O valor individual é: R$" + a[contA]);
+            contA++;
             vertical.add(labels[i]);
             i++;
         }
@@ -48,7 +53,8 @@ public class JanelaConta extends JFrame{
         labels[i] = new JLabel("Fechado em: " + pedido.getFechado());
         vertical.add(labels[i]);
         i++;
-        labels[i] = new JLabel("O valor total foi de R$:" + pedido.getValor());
+        String resultado = String.format("%.2f", pedido.getValor());
+        labels[i] = new JLabel("O valor total foi de R$:" + resultado);
         vertical.add(labels[i]);
         painel.add(vertical);
         add(new JScrollPane(painel));

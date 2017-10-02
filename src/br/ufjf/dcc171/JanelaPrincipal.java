@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
@@ -60,7 +61,7 @@ public class JanelaPrincipal extends JFrame{
                 }
                 else
                 {
-                    
+                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -86,7 +87,7 @@ public class JanelaPrincipal extends JFrame{
                 }
                 else
                 {
-                    
+                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

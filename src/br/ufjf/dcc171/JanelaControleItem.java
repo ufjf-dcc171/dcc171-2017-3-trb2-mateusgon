@@ -26,6 +26,7 @@ import javax.swing.ListSelectionModel;
 
 public class JanelaControleItem extends JFrame{
 
+    private boolean abrirJanela = true;
     private final Item modificado;
     private final SampleDataItem item;
     private String TipoItem = null;
@@ -62,153 +63,165 @@ public class JanelaControleItem extends JFrame{
                 }
             }
 
-            private void configurarAdicionar() {
-                JButton confirmar = new JButton("Confirmar");
-                ButtonGroup btg = new ButtonGroup();
-                JTextField [] texto = new JTextField[2];
-                Box vertical = Box.createVerticalBox();
-                Box horizontal = Box.createHorizontalBox();
-                Box horizontal2 = Box.createHorizontalBox();
-                Box horizontal3 = Box.createHorizontalBox();
-                JRadioButton [] chk = new JRadioButton[4];
-                JLabel [] adicionar = new JLabel[3];
-                
-                adicionar[0] = new JLabel("Nome: ");
-                texto[0] = new JTextField("Nome (Descrição)");
-                adicionar[1] = new JLabel("Tipo do Item: ");
-                chk[0] = new JRadioButton("Pizza Salgada");
-                chk[1] = new JRadioButton("Pizza Doce");
-                chk[2] = new JRadioButton("Pizza Sobremesa");
-                chk[3] = new JRadioButton("Bebida");
-                adicionar[2] = new JLabel("Valor: ");
-                texto[1] = new JTextField("0.00");
-                
-                horizontal.add(adicionar[0]);
-                horizontal.add(texto[0]);
-                vertical.add(horizontal);
-                horizontal2.add(adicionar[1]);
-                horizontal2.add(chk[0]);
-                horizontal2.add(chk[1]);
-                horizontal2.add(chk[2]);
-                horizontal2.add(chk[3]);
-                btg.add(chk[0]);
-                btg.add(chk[1]);
-                btg.add(chk[2]);
-                btg.add(chk[3]);
-               
-                vertical.add(horizontal2);
-                horizontal3.add(adicionar[2]);
-                horizontal3.add(texto[1]);
-                vertical.add(horizontal3);
-                vertical.add(confirmar, BorderLayout.SOUTH);
-                janelaItem.add(vertical);
-                
-                chk[0].addItemListener(new TipoItem("Pizza Salgada"));
-                chk[1].addItemListener(new TipoItem("Pizza Doce"));
-                chk[2].addItemListener(new TipoItem("Sobremesa"));
-                chk[3].addItemListener(new TipoItem("Bebida"));
-                
-                confirmar.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null))
-                        {    
-                            Item novo = new Item();
-                            novo.setNome(texto[0].getText());
-                            novo.setTipoItem(TipoItem);
-                            try {   
-                                Double valor = Double.parseDouble(texto[1].getText());
-                                if (valor != 0)
+            private void configurarAdicionar() {   
+                    JButton confirmar = new JButton("Confirmar");
+                    ButtonGroup btg = new ButtonGroup();
+                    JTextField [] texto = new JTextField[2];
+                    Box vertical = Box.createVerticalBox();
+                    Box horizontal = Box.createHorizontalBox();
+                    Box horizontal2 = Box.createHorizontalBox();
+                    Box horizontal3 = Box.createHorizontalBox();
+                    JRadioButton [] chk = new JRadioButton[4];
+                    JLabel [] adicionar = new JLabel[3];
+
+                    adicionar[0] = new JLabel("Nome: ");
+                    texto[0] = new JTextField("Nome (Descrição)");
+                    adicionar[1] = new JLabel("Tipo do Item: ");
+                    chk[0] = new JRadioButton("Pizza Salgada");
+                    chk[1] = new JRadioButton("Pizza Doce");
+                    chk[2] = new JRadioButton("Sobremesa");
+                    chk[3] = new JRadioButton("Bebida");
+                    adicionar[2] = new JLabel("Valor: ");
+                    texto[1] = new JTextField("0.00");
+
+                    horizontal.add(adicionar[0]);
+                    horizontal.add(texto[0]);
+                    vertical.add(horizontal);
+                    horizontal2.add(adicionar[1]);
+                    horizontal2.add(chk[0]);
+                    horizontal2.add(chk[1]);
+                    horizontal2.add(chk[2]);
+                    horizontal2.add(chk[3]);
+                    btg.add(chk[0]);
+                    btg.add(chk[1]);
+                    btg.add(chk[2]);
+                    btg.add(chk[3]);
+
+                    vertical.add(horizontal2);
+                    horizontal3.add(adicionar[2]);
+                    horizontal3.add(texto[1]);
+                    vertical.add(horizontal3);
+                    vertical.add(confirmar, BorderLayout.SOUTH);
+                    janelaItem.add(vertical);
+
+                    chk[0].addItemListener(new TipoItem("Pizza Salgada"));
+                    chk[1].addItemListener(new TipoItem("Pizza Doce"));
+                    chk[2].addItemListener(new TipoItem("Sobremesa"));
+                    chk[3].addItemListener(new TipoItem("Bebida"));
+
+                    confirmar.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null))
+                            {    
+                                Item novo = new Item();
+                                novo.setNome(texto[0].getText());
+                                novo.setTipoItem(TipoItem);
+                                try {   
+                                    Double valor = Double.parseDouble(texto[1].getText());
+                                    if (valor != 0)
+                                    {
+                                        novo.setValor(valor);
+                                        sdi.getItem().add(novo);
+                                        JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    
+                                    }
+                                    else
+                                    {
+                                        JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                }   
+                                catch (NumberFormatException ex)
                                 {
-                                    novo.setValor(valor);
-                                    sdi.getItem().add(novo);
+                                    JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
                                 }
-                                else
-                                {
-                                    JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
-                                }
-                            }   
-                            catch (NumberFormatException ex)
-                            {
-                                JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
                             }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
+                            }    
                         }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
-                        }    
-                    }
-                });
-                
+                    });
             }
 
             private void configurarAlterar() {
-                JButton alterar = new JButton("Alterar");
-                JList<Item> lstItem = new JList<>(new DefaultListModel<>());
-                lstItem.setModel(new ItemListModel(item.getItem()));
-                lstItem.setMinimumSize(new Dimension(500, 500));
-                lstItem.setPreferredSize(new Dimension(500, 500));
-                janelaItem.add(new JScrollPane(lstItem), BorderLayout.CENTER);
-                janelaItem.add(alterar);
-                lstItem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                alterar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                Item selecionado = lstItem.getSelectedValue();
-                   if (selecionado != null)
-                   {
-                       int i = sdi.getItem().indexOf(selecionado);
-                       JanelaControleItem modific = new JanelaControleItem(sdi.getItem().get(i));
-                       modific.setSize(600, 150);
-                       modific.setLocationRelativeTo(null);
-                       modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                       modific.setVisible(true);
-                       modific.addWindowListener(new WindowAdapter() {
-                           @Override
-                           public void windowClosing(WindowEvent evt) {
-                               modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                               Item a = modific.getModificado();
-                               sdi.getItem().get(i).setNome(a.getNome());
-                               sdi.getItem().get(i).setTipoItem(a.getTipoItem());
-                               sdi.getItem().get(i).setValor(a.getValor());
-                           }
-                       });
-                       lstItem.clearSelection();
-                       lstItem.updateUI();
-                   } 
-                   else
-                   {
-                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um Item.", "Selecione um Item.", JOptionPane.INFORMATION_MESSAGE);
-                   }
-            }
-            }); 
-               }    
+                    JButton alterar = new JButton("Alterar");
+                    JList<Item> lstItem = new JList<>(new DefaultListModel<>());
+                    lstItem.setModel(new ItemListModel(item.getItem()));
+                    lstItem.setMinimumSize(new Dimension(500, 500));
+                    lstItem.setPreferredSize(new Dimension(500, 500));
+                    janelaItem.add(new JScrollPane(lstItem), BorderLayout.CENTER);
+                    janelaItem.add(alterar);
+                    lstItem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    alterar.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    Item selecionado = lstItem.getSelectedValue();
+                        if (selecionado != null)
+                        {
+                            if (abrirJanela)
+                            {
+                                abrirJanela = false;
+                                int i = sdi.getItem().indexOf(selecionado);
+                                JanelaControleItem modific = new JanelaControleItem(sdi.getItem().get(i));
+                                modific.setSize(600, 150);
+                                modific.setLocationRelativeTo(null);
+                                modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                modific.setVisible(true);
+                                modific.addWindowListener(new WindowAdapter() {
+                                    @Override
+                                    public void windowClosing(WindowEvent evt) {
+                                            modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                            Item a = modific.getModificado();
+                                            sdi.getItem().get(i).setNome(a.getNome());
+                                            sdi.getItem().get(i).setTipoItem(a.getTipoItem());
+                                            sdi.getItem().get(i).setValor(a.getValor());
+                                            lstItem.clearSelection();
+                                            lstItem.updateUI();
+                                            abrirJanela = true;
+                                    }
+                                });
+                                lstItem.clearSelection();
+                                lstItem.updateUI();
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } 
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um Item.", "Selecione um Item.", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                 }
+                 });
+            }    
 
             private void configurarExcluir() {
-                JButton remover = new JButton("Remover");
-                JList<Item> lstItem = new JList<>(new DefaultListModel<>());
-                lstItem.setModel(new ItemListModel(item.getItem()));
-                lstItem.setMinimumSize(new Dimension(500, 500));
-                lstItem.setPreferredSize(new Dimension(500, 500));
-                janelaItem.add(new JScrollPane(lstItem), BorderLayout.CENTER);
-                janelaItem.add(remover);
-                lstItem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                remover.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                Item selecionado = lstItem.getSelectedValue();
-                   if (selecionado != null)
-                   {
-                       sdi.getItem().remove(selecionado); 
-                       lstItem.clearSelection();
-                       lstItem.updateUI();
-                   }
-                   else
-                   {
-                       JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um Item.", "Selecione um Item.", JOptionPane.INFORMATION_MESSAGE);
-                   }
-                }
-            });
+                    JButton remover = new JButton("Remover");
+                    JList<Item> lstItem = new JList<>(new DefaultListModel<>());
+                    lstItem.setModel(new ItemListModel(item.getItem()));
+                    lstItem.setMinimumSize(new Dimension(500, 500));
+                    lstItem.setPreferredSize(new Dimension(500, 500));
+                    janelaItem.add(new JScrollPane(lstItem), BorderLayout.CENTER);
+                    janelaItem.add(remover);
+                    lstItem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    remover.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    Item selecionado = lstItem.getSelectedValue();
+                       if (selecionado != null)
+                       {
+                           sdi.getItem().remove(selecionado);
+                           lstItem.clearSelection();
+                           lstItem.updateUI();
+                       }
+                       else
+                       {
+                           JOptionPane.showMessageDialog(null, "Você deveria ter selecionado um Item.", "Selecione um Item.", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                    }
+                });
          }
         });
         layouts.setSelectedIndex(0);
@@ -289,24 +302,27 @@ public class JanelaControleItem extends JFrame{
         confirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null)) {
-                    getModificado().setNome(texto[0].getText());
-                    getModificado().setTipoItem(TipoItem);
-                    try {
-                        Double valor = Double.parseDouble(texto[1].getText());
-                        if (valor != 0) {
-                            getModificado().setValor(valor);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
+                    if (!(texto[0].getText() == null) && !("Nome (Descrição)".equals(texto[0].getText())) && !(TipoItem == null) && !(texto[1].getText() == "0.00") && !(texto[1].getText() == null)) {
+                        getModificado().setNome(texto[0].getText());
+                        getModificado().setTipoItem(TipoItem);
+                        try {
+                            Double valor = Double.parseDouble(texto[1].getText());
+                            if (valor != 0) {
+                                getModificado().setValor(valor);
+                                JOptionPane.showMessageDialog(null, "O seu item foi atualizado com sucesso.", "Alteração realizada.", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "O valor do seu produto é R$0.00\nDigite novamente o pedido", "Valor 0", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Você não digitou um valor ou o valor está no formato incorreto.\nLembre-se, o valor deve ser, por exemplo, 0.00.", "Número no formato incorreto", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Verifique como você cadastrou os dados, algo foi informado errado.\nTente novamente!", "Algo digitado incorreto", JOptionPane.INFORMATION_MESSAGE);
-                }
+                
             }
-        });
+            
+            });
         layouts.setSelectedIndex(0);
 
     }

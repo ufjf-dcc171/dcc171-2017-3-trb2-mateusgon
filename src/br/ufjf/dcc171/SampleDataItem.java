@@ -51,7 +51,8 @@ public class SampleDataItem {
     public String nomeValor (int i)
     {
         Item f = item.get(i);
-        return f.getNome() + " - R$" + f.getValor();
+        String resultado = String.format("%.2f", f.getValor());
+        return f.getNome() + " - R$" + resultado;
     }
     
     public Item getItemPosicao(int i)

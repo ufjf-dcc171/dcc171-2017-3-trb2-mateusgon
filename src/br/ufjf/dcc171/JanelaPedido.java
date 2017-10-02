@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class JanelaPedido extends JFrame{
@@ -40,7 +41,7 @@ public class JanelaPedido extends JFrame{
         espacosJextFieldNumeros = new JtextFieldSomenteNumeros[sdi.getItem().size()];
         textosJLabels = new JLabel[sdi.getItem().size()];
         add(layouts, BorderLayout.NORTH);
-        add(janelaPedido, BorderLayout.CENTER);
+        add(new JScrollPane(janelaPedido), BorderLayout.CENTER);
         for (int i = 0; i < sdi.getItem().size(); i++)
         {
             espacosJextFieldNumeros[i] = new JtextFieldSomenteNumeros();
@@ -177,7 +178,8 @@ public class JanelaPedido extends JFrame{
                         pedido.setAberto(data);
                         pedido.setStatusAberto(true);
                         fecharJanelaAutorizado = true;
-                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + pedido.getValor() + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                        String resultado = String.format("%.2f", pedido.getValor());
+                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else
                     {
@@ -333,7 +335,8 @@ public class JanelaPedido extends JFrame{
                     }
                     if (possuiProdutos)
                     {
-                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + ped.getValor() + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                        String resultado = String.format("%.2f", ped.getValor());
+                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
                         fecharJanelaAutorizado = true;
                     }
                     else
