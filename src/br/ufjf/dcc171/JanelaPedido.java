@@ -6,6 +6,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -173,9 +174,11 @@ public class JanelaPedido extends JFrame{
                     }
                     Calendar c = Calendar.getInstance();
                     Date data = c.getTime();
+                    SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");     
+                    String str = fmt.format(data);
                     if (possuiProdutos)
                     {
-                        pedido.setAberto(data);
+                        pedido.setAberto(str);
                         pedido.setStatusAberto(true);
                         fecharJanelaAutorizado = true;
                         String resultado = String.format("%.2f", pedido.getValor());

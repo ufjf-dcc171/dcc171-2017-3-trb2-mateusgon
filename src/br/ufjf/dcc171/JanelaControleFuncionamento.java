@@ -27,7 +27,7 @@ public class JanelaControleFuncionamento extends JFrame {
 
         private boolean abrirJanela = true;
         private int i;
-        private int contadorPedidos=0;
+        private int contadorPedidos;
         private final List<Mesas> mesas;
         private final JList<Mesas> lstMesas = new JList<>(new DefaultListModel<>());
         private final JList<Pedido> lstPedidos = new JList<>(new DefaultListModel<>());
@@ -40,11 +40,12 @@ public class JanelaControleFuncionamento extends JFrame {
         private final JButton totalFaturado = new JButton("Total Faturado");
         private final JButton verPedido = new JButton("Ver Pedido");
     
-    public JanelaControleFuncionamento(List<Mesas> sampleData, SampleDataItem sdi) throws HeadlessException {
+    public JanelaControleFuncionamento(List<Mesas> sampleData, SampleDataItem sdi, int ContadorPedidos) throws HeadlessException {
         super("Controle de Pedidos");
         setPreferredSize(new Dimension(730, 600));
         setMinimumSize(new Dimension(500, 400));
         
+        this.contadorPedidos = ContadorPedidos;
         
         this.mesas = sampleData;
         lstMesas.setModel(new MesasListModel(mesas));
@@ -135,7 +136,7 @@ public class JanelaControleFuncionamento extends JFrame {
                             @Override
                             public void windowClosing(WindowEvent evt) {
                                 if (realizarPedido.getFechar()) {
-                                    Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + contadorPedidos);
+                                    Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + getContadorPedidos());
                                     contadorPedidos++;
                                     lstMesas.getSelectedValue().getPedidos().add(p1);
                                     lstPedidos.updateUI();
@@ -341,4 +342,9 @@ public class JanelaControleFuncionamento extends JFrame {
     {
         return this.mesas;
     }
+
+    public int getContadorPedidos() {
+        return contadorPedidos;
+    }
+    
 }

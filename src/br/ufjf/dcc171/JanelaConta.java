@@ -3,6 +3,7 @@ package br.ufjf.dcc171;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,9 @@ public class JanelaConta extends JFrame{
 
         Calendar c = Calendar.getInstance();
         Date data = c.getTime();
-        pedido.setFechado(data);
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");    
+        String str = fmt.format(data);
+        pedido.setFechado(str);
         pedido.setStatusAberto(false);
         labels[i] = new JLabel("Fechado em: " + pedido.getFechado());
         vertical.add(labels[i]);

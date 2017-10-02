@@ -11,8 +11,8 @@ public class Pedido {
     private String nome;
     private List<ItemDoPedido> itemDoPedido;
     private boolean statusAberto;
-    private Date aberto;
-    private Date fechado;
+    private String aberto;
+    private String fechado;
     private Double valor;
 
     public Pedido(String nome) {
@@ -48,19 +48,19 @@ public class Pedido {
         this.statusAberto = statusAberto;
     }
 
-    public Date getAberto() {
+    public String getAberto() {
         return aberto;
     }
 
-    public void setAberto(Date aberto) {
+    public void setAberto(String aberto) {
         this.aberto = aberto;
     }
 
-    public Date getFechado() {
+    public String getFechado() {
         return fechado;
     }
 
-    public void setFechado(Date fechado) {
+    public void setFechado(String fechado) {
         this.fechado = fechado;
     }
 

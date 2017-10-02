@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
     
+    private int contadorPedidos = 0;
     private boolean abrirJanela = true;
     private final JPanel inicio = new JPanel();
     private final JButton administrarItem = new JButton("Administre seus itens");
@@ -71,7 +72,7 @@ public class JanelaPrincipal extends JFrame{
                 if (abrirJanela)
                 {
                     abrirJanela = false;
-                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi);
+                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi, contadorPedidos);
                     inicio.setSize(730, 600);
                     inicio.setLocationRelativeTo(null);
                     inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -81,7 +82,9 @@ public class JanelaPrincipal extends JFrame{
                                public void windowClosing(WindowEvent evt) {
                                    inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                    mesas = inicio.getMesas();
+                                   contadorPedidos = inicio.getContadorPedidos();
                                    abrirJanela = true;
+                                   
                                }
                     });
                 }
