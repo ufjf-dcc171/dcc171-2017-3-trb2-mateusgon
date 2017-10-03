@@ -45,7 +45,4 @@ public class Mesas {
     public void setNumero(Integer numero) {
         this.numero = numero;
     }
-
-    
-    
 }

@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 
 public class JanelaPedido extends JFrame{
   
+    private boolean possuiPedidoIgualZero = false;
     private boolean confirmarNaoApertado = true;
     private boolean fecharJanelaAutorizado = false;
     private Pedido pedido;
@@ -151,44 +152,59 @@ public class JanelaPedido extends JFrame{
                     {
                         if (!"".equals(espacosJextFieldNumeros[i].getText()))
                         {
-                            j[i] = parseInt(espacosJextFieldNumeros[i].getText());
-                            cont++;
-                            possuiProdutos = true;
+                            if (espacosJextFieldNumeros[i].getText().equals("0"))
+                            {
+                                possuiPedidoIgualZero = true;
+                                System.out.println("q");
+                            }
+                            else
+                            {
+                                j[i] = parseInt(espacosJextFieldNumeros[i].getText());
+                                cont++;
+                                possuiProdutos = true;
+                            }
                         }
                         else
                         {
                             j[i] = 0;
                         }
                     }
-                    pedido = new Pedido();
-                    ItemDoPedido [] idp = new ItemDoPedido[cont];
-                    cont = 0;
-                    for (i = 0; i < sdi.getItem().size(); i++)
-                    {
-                        if (j[i] != 0)
-                        {
-                            idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
-                            pedido.getItemDoPedido().add(idp[cont]);
-                            cont++;
-                        }
-                    }
-                    Calendar c = Calendar.getInstance();
-                    Date data = c.getTime();
-                    SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");     
-                    String str = fmt.format(data);
-                    if (possuiProdutos)
-                    {
-                        pedido.setAberto(str);
-                        pedido.setStatusAberto(true);
-                        fecharJanelaAutorizado = true;
-                        String resultado = String.format("%.2f", pedido.getValor());
-                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                    if (!possuiPedidoIgualZero)
+                    {        
+                            pedido = new Pedido();
+                            ItemDoPedido [] idp = new ItemDoPedido[cont];
+                            cont = 0;
+                            for (i = 0; i < sdi.getItem().size(); i++)
+                            {
+                                if (j[i] != 0)
+                                {
+                                    idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
+                                    pedido.getItemDoPedido().add(idp[cont]);
+                                    cont++;
+                                }
+                            }
+                            Calendar c = Calendar.getInstance();
+                            Date data = c.getTime();
+                            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");     
+                            String str = fmt.format(data);
+                            if (possuiProdutos)
+                            {
+                                pedido.setAberto(str);
+                                pedido.setStatusAberto(true);
+                                fecharJanelaAutorizado = true;
+                                String resultado = String.format("%.2f", pedido.getValor());
+                                JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + pedido.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                            }
+                            confirmarNaoApertado = false;
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Seu pedido está vazio, realize-o, por-favor");
+                        JOptionPane.showMessageDialog(null, "Existem algum item do pedido com 0, conserte-o");
                     }
-                    confirmarNaoApertado = false;
                 }
                 else
                 {
@@ -316,37 +332,51 @@ public class JanelaPedido extends JFrame{
                     {
                         if (!"".equals(espacosJextFieldNumeros[i].getText()))
                         {
-                            j[i] = parseInt(espacosJextFieldNumeros[i].getText());
-                            cont++;
-                            possuiProdutos = true;
+                            if (espacosJextFieldNumeros[i].getText().equals("0"))
+                            {
+                                possuiPedidoIgualZero = true;
+                            }
+                            else 
+                            {
+                                j[i] = parseInt(espacosJextFieldNumeros[i].getText());
+                                cont++;
+                                possuiProdutos = true;
+                            }
                         }
                         else
                         {
                             j[i] = 0;
                         }
                     }
-                    ItemDoPedido [] idp = new ItemDoPedido[cont];
-                    cont = 0;
-                    for (i = 0; i < sdi.getItem().size(); i++)
+                    if (!possuiPedidoIgualZero)
                     {
-                        if (j[i] != 0)
+                        ItemDoPedido [] idp = new ItemDoPedido[cont];
+                        cont = 0;
+                        for (i = 0; i < sdi.getItem().size(); i++)
                         {
-                            idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
-                            ped.getItemDoPedido().add(idp[cont]);
-                            cont++;
+                            if (j[i] != 0)
+                            {
+                                idp[cont] = new ItemDoPedido(sdi.getItemPosicao(i), j[i]);
+                                ped.getItemDoPedido().add(idp[cont]);
+                                cont++;
+                            }
                         }
-                    }
-                    if (possuiProdutos)
-                    {
-                        String resultado = String.format("%.2f", ped.getValor());
-                        JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
-                        fecharJanelaAutorizado = true;
+                        if (possuiProdutos)
+                        {
+                            String resultado = String.format("%.2f", ped.getValor());
+                            JOptionPane.showMessageDialog(null, "Pedido feito e computado.\n" + "Valor Total: R$" + resultado + "\n" + "Realizado no dia e na hora: " + ped.getAberto(), "Pedido realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                            fecharJanelaAutorizado = true;
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Seu pedido está só com itens do outro pedido, realize-o, por-favor");
+                        }
+                        confirmarNaoApertado = false;
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Seu pedido está só com itens do outro pedido, realize-o, por-favor");
+                        JOptionPane.showMessageDialog(null, "Seu pedido possui 0 como entrada de algum item do pedido");  
                     }
-                    confirmarNaoApertado = false;
                 }
                 else
                 {
