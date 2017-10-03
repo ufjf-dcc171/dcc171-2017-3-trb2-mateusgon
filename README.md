@@ -31,6 +31,18 @@ O total faturado durante o funcionamento do software e, por fim, Fechar a Conta 
 
 <h2> - Campos necessários para a construção das telas </h2>
 
+<p1> Primeiramente, acho importante dizer que ao todo foram utilizadas 7 janelas no projeto. A primeira janela é a "Janela Principal", nela é utilizada uma divisão de tela, onde dois JButtons são utilizados. Um para gerenciar os itens e outro o funcionamento. </br>
+
+Caso o primeiro botão seja apertado, a "Janela Controle Item" é instanciada e ela possui um Combo Box, um JPanel, JList, JLabels, Box Horizontais e Box Verticais e, por fim, JRadioButton também são utilizados. No geral, os componentes gráficos são utilizados para preencher campos de novos itens e para alterar itens, e o JList é utilizado para listar os itens já existentes. Os botões, no geral, são utilizados para confirmar, alterar e excluir. </br>
+
+Caso o segundo botão seja apertado, a "Janela Controle Funcionamento" é instanciada e ela é mais complexa, pois possui ligada a ela 4 outras janelas. Ela é composta por duas JLists, 8 JButtons. Essa janela servirá para fazer o controle do funcionamento da pizzaria. O primeiro botão serve para criar uma nova mesa, sendo que há um contador de mesas e o nome é colocado automaticamente. O segundo botão serve para excluir uma mesa selecionada. </br>
+
+O terceiro botão chamado de "Realizar Pedido" oferece uma nova janela, a "Janela Pedido", onde existe o Combo Box, vertical box, JPanel, JTextFieldSomenteNumeros (Retirado de: http://www.devmedia.com.br/como-alterar-o-componente-jtextfield-para-aceitar-apenas-numeros/26152) e alguns JLabels, são utilizados em duas ocasiões, para realizar um pedido novo ou para acrescentar algo a um pedido, possuindo dois construtores. O cliente digita no campo a quantidade de determinado item desejado e muda o tipo do item desejado no combo box. Realizar Pedido também possui um botão, o confirmar, o qual confirma o pedido do cliente e informa o valor parcial. Um botão relacionado é o Excluir Pedido, onde um pedido pode ser excluído selecionando uma mesa e um pedido da mesa. </br>
+
+"Ver Cardapio" é mais um botão e instancia mais uma janela, a "Janela Cardápio", onde Combo Box é utilizado, JLabels e JPanel, além de vertical box. "Ver Pedidos" é muito semelhante a outro botão, o "Fechar Conta", onde, cada um, respectivamente, instanciam "Janela Lista Pedidos" e "Janela Conta". Ambas utilizam JLabels, JPanels, além de vertical box para demonstrarem os pedidos e as compras feitas pelos clientes. Por fim, o último botão é o Total Faturado, o qual utiliza JOptionPane para exibir o valor todo ganho no dia de funcionamento. </br>
+
+Vale citar que diversos JOptionPane são utilizados, principalmente para demonstrar erros ou alguma coisa feita de forma errada dentro do sistema. Em alguns casos, o usuário deverá responder "Sim" ou "Não", em outros, não há necessidade, ele somente deverá conferir o que foi feito. </p1>
+
 <h2> - Pontos importantes da interface </h2>
 
 <p1> A interface gráfica, inicialmente, foi dividida em duas partes, a parte de administração dos itens e administração do funcionamento. Quando iniciado, o software possui dois botões, o primeiro botão se refere a administração dos itens e o segundo a administração do funcionamento. </br>
