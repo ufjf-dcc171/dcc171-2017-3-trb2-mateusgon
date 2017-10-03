@@ -66,7 +66,7 @@ Creio que no geral a maior dificuldade foi na formatação da tela para o client
 <h2> - Melhorias futuras </h2> 
 
 <p1> Melhorias futuras podem ocorrer com a utilização de um banco de dados, onde controlar a quantidade de itens disponíveis
-pode se apresentar como uma boa solução. Além disso, a utilização do Banco de Dados pode oferecer ao sistema um maior controle e administração dos dados através de novas funcionalidades que possam surgir para melhorar o funcionamento do softare. </br>
+pode se apresentar como uma boa solução. Além disso, a utilização do Banco de Dados pode oferecer ao sistema um maior controle e administração dos dados através de novas funcionalidades que possam surgir para melhorar o funcionamento do software. </br>
 
 Outra melhoria futura que pode vir a ser interessante seria a possibilidade de alterar um pedido o qual já foi realizado, dessa maneira, não seria necessária a exclusão do mesmo para depois realizá-lo novamente. Poderia haver um controle maior também sobre o número dos pedidos, podendo ser reiniciada a contagem de acordo com a vontade do cliente. Outra mudança interessante se trata da possibilidade de poder realizar a descrição dos itens, sobre a forma de preparação para pessoas que possam vir a ter problemas com ingredientes. No "Total faturado", uma boa melhoria futura seria mostrar a quantidade de itens que foram consumidos, para saber quais itens atraem mais os clientes e são vendidos. </br>
 
