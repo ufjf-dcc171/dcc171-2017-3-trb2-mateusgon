@@ -26,7 +26,7 @@ public class JanelaPrincipal extends JFrame{
     private List<Mesas> mesas = new ArrayList<>();
     
     public JanelaPrincipal() throws HeadlessException {
-        super("Pizzaria Petini");
+        super("Pizzaria Petini - Bem-vindo");
         
         sdi = new SampleDataItem();
         Mesas mesa = new Mesas("Mesa 0", 0);
