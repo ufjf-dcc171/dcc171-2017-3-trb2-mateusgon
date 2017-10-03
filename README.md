@@ -29,6 +29,10 @@ O total faturado durante o funcionamento do software e, por fim, Fechar a Conta 
 
 <h2> - Modelo de Dados </h2> 
 
+<p1> O modelo de dados pode ser visualizado em: https://imgur.com/a/RGkc9 ou https://drive.google.com/open?id=0B2tDgEVXFkfUVEZRcER3OWVGMWc </br>
+No geral, o diagrama só mostra o relacionamento entre as classes mais importantes. </br>
+Não foi possível colocar a imagem aqui, por isso, o link. </p1>
+
 <h2> - Campos necessários para a construção das telas </h2>
 
 <p1> Primeiramente, acho importante dizer que ao todo foram utilizadas 7 janelas no projeto. A primeira janela é a "Janela Principal", nela é utilizada uma divisão de tela, onde dois JButtons são utilizados. Um para gerenciar os itens e outro o funcionamento. </br>
