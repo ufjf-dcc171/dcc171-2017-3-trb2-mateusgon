@@ -143,6 +143,7 @@ public class JanelaPedido extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean possuiProdutos = false;
+                possuiPedidoIgualZero = false;
                 if (confirmarNaoApertado)
                 {
                     int j[] = new int[sdi.getItem().size()];
@@ -155,7 +156,6 @@ public class JanelaPedido extends JFrame{
                             if (espacosJextFieldNumeros[i].getText().equals("0"))
                             {
                                 possuiPedidoIgualZero = true;
-                                System.out.println("q");
                             }
                             else
                             {
