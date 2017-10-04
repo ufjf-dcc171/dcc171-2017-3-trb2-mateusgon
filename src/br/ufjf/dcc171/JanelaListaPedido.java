@@ -40,8 +40,8 @@ public class JanelaListaPedido extends JFrame{
         if (!pedido.isStatusAberto())
         {
             labels[i] = new JLabel("Fechado em: " + pedido.getFechado());
-            i++;
             vertical.add(labels[i]);
+            i++;
             labels[i] = new JLabel("Valor total: R$" + pedido.getValor());
             vertical.add(labels[i]);
             i++;

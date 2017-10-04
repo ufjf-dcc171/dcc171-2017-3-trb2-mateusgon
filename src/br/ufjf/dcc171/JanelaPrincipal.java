@@ -62,7 +62,7 @@ public class JanelaPrincipal extends JFrame{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "Você deve fechar a janela aberta primeiro.", "Feche a janela aberta.", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

@@ -51,8 +51,11 @@ public class JanelaControleFuncionamento extends JFrame {
         this.mesas = sampleData;
         lstMesas.setModel(new MesasListModel(mesas));
         
-        lstMesas.setPreferredSize(new Dimension(200, 200));
-        lstPedidos.setPreferredSize(new Dimension(500, 200));
+        
+        lstMesas.setMinimumSize(new Dimension(200, 200));
+        lstPedidos.setMinimumSize(new Dimension(500, 200));
+        lstMesas.setMaximumSize(new Dimension(200, 200));
+        lstPedidos.setMaximumSize(new Dimension(500, 200)); 
         
         JPanel botoes = new JPanel(new GridLayout(2, 4));
         botoes.add(adicionarMesa);
@@ -101,12 +104,28 @@ public class JanelaControleFuncionamento extends JFrame {
         excluirMesa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean fecharMesa = false;
                 Mesas selecionado = lstMesas.getSelectedValue();
                    if (selecionado != null)
                    {
-                       mesas.remove(lstMesas.getSelectedValue());
-                       lstMesas.clearSelection();
-                       lstMesas.updateUI();
+                       List<Pedido> p = selecionado.getPedidos();
+                       for (Pedido pedido : p)
+                       {
+                           if (pedido.isStatusAberto())
+                           {
+                               fecharMesa = true;
+                           }
+                       }
+                       if (!fecharMesa)
+                       {
+                            mesas.remove(lstMesas.getSelectedValue());
+                            lstMesas.clearSelection();
+                            lstMesas.updateUI();
+                       }
+                       else
+                       {
+                            JOptionPane.showMessageDialog(null, "Você deveria ter fechado o pedido antes", "A mesa possui um pedido aberto", JOptionPane.INFORMATION_MESSAGE); 
+                       }
                    }
                    else
                    {
