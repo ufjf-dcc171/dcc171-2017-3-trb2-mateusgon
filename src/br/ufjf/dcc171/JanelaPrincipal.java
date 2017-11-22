@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -27,9 +28,9 @@ public class JanelaPrincipal extends JFrame{
     private SampleDataItem sdi;
     private List<Mesas> mesas = new ArrayList<>();
     
-    public JanelaPrincipal() throws HeadlessException {
+    public JanelaPrincipal() throws HeadlessException, IOException {
         super("Pizzaria Petini - Bem-vindo");
-        sdi = new SampleDataItem(dir.getArquivoItem());
+        sdi = new SampleDataItem(dir.getArquivoItemEndereco());
         Mesas mesa = new Mesas("Mesa 0", 0);
         mesas.add(mesa);
         setMinimumSize(new Dimension(600, 325));

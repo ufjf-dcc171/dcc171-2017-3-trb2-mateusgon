@@ -1,16 +1,22 @@
 package br.ufjf.dcc171;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SampleDataItem {
     private ArrayList<Item> item;
-    private String endereco;
+    private ItemDAO dao;
 
-    public SampleDataItem(FileWriter itens) {
+    public SampleDataItem(String itens) throws IOException {
         item = new ArrayList<Item>();
-        endereco = itens.toString();
-        adicionaItem(item);
+        dao = new ItemDAO(itens);
+        if (dao.vazio()){
+            adicionaItem(item);}
+        else
+        {
+            carregaItem();
+        }
     }
 
     private void adicionaItem(ArrayList<Item> itemList) {
@@ -39,10 +45,17 @@ public class SampleDataItem {
         {
             itemList.add(item[i]);
         }
+        dao.cria(itemList);
+    }
+    
+    private void carregaItem () throws IOException
+    {
+        this.item = dao.busca();
     }
     
     public ArrayList<Item> getItem() {
         return item;
+        
     }
     
     public String getTipo (int i)

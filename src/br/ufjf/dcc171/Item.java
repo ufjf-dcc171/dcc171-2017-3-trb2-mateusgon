@@ -44,10 +44,7 @@ public class Item {
 
     public void setTipoItem(String tipoItem) {
         this.tipoItem = tipoItem;
-    }
-    
-    
-    
+    }    
 }
     
     
