@@ -97,7 +97,7 @@ public class JanelaControleFuncionamento extends JFrame {
                Mesas m = new Mesas("Mesa " + i, i);
                mesas.add(m);
                lstMesas.updateUI();
-               mesasDao.adicionar();
+               mesasDao.adicionar(m);
                pack();
             }
         });
