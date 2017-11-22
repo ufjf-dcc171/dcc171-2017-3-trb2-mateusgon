@@ -1,14 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufjf.dcc171;
 
-/**
- *
- * @author Mateus G
- */
+import java.util.ArrayList;
+
 public class MesasDAO {
+
+    private String endereco;
+    
+    public MesasDAO(String enderecoMesas) {
+        endereco = enderecoMesas;
+    }
+
+    public void criar ()
+    {
+    
+    }
+
+    public void adicionar ()
+    {
+    
+    }
+
+    public ArrayList<Mesas> buscar ()
+    {
+        ArrayList <Mesas> m = new ArrayList<>();
+        Mesas a = new Mesas("Mesa 0", 0);
+        m.add(a);
+        return m;
+    }
+
+    public void excluir ()
+    {
+    
+    }
     
 }

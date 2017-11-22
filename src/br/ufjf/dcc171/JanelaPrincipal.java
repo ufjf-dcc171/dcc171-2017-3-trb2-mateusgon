@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
     
-    private Diretorio dir = new Diretorio();;
+    private Diretorio dir = new Diretorio();
     private int contadorPedidos = 0;
     private boolean abrirJanela = true;
     private final JPanel inicio = new JPanel();
@@ -31,8 +31,8 @@ public class JanelaPrincipal extends JFrame{
     public JanelaPrincipal() throws HeadlessException, IOException {
         super("Pizzaria Petini - Bem-vindo");
         sdi = new SampleDataItem(dir.getArquivoItemEndereco());
-        Mesas mesa = new Mesas("Mesa 0", 0);
-        mesas.add(mesa);
+        MesasDAO dao = new MesasDAO(dir.getArquivoMesaEndereco());        
+        mesas = dao.buscar();
         setMinimumSize(new Dimension(600, 325));
         setPreferredSize(new Dimension(600, 325));
         administrarItem.setPreferredSize(new Dimension(300, 144));
@@ -73,7 +73,7 @@ public class JanelaPrincipal extends JFrame{
                 if (abrirJanela)
                 {
                     abrirJanela = false;
-                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi, contadorPedidos);
+                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi, contadorPedidos, dao);
                     inicio.setSize(730, 600);
                     inicio.setLocationRelativeTo(null);
                     inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
