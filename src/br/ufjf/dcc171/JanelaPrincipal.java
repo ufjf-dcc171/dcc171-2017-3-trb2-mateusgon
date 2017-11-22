@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
     
+    private Diretorio dir = new Diretorio();;
     private int contadorPedidos = 0;
     private boolean abrirJanela = true;
     private final JPanel inicio = new JPanel();
@@ -27,11 +29,9 @@ public class JanelaPrincipal extends JFrame{
     
     public JanelaPrincipal() throws HeadlessException {
         super("Pizzaria Petini - Bem-vindo");
-        
-        sdi = new SampleDataItem();
+        sdi = new SampleDataItem(dir.getArquivoItem());
         Mesas mesa = new Mesas("Mesa 0", 0);
         mesas.add(mesa);
-        
         setMinimumSize(new Dimension(600, 325));
         setPreferredSize(new Dimension(600, 325));
         administrarItem.setPreferredSize(new Dimension(300, 144));
@@ -94,7 +94,5 @@ public class JanelaPrincipal extends JFrame{
                 }
             }
         });
-        
-       
     }  
 }

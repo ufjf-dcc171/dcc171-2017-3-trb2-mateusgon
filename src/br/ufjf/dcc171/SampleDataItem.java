@@ -1,12 +1,15 @@
 package br.ufjf.dcc171;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class SampleDataItem {
     private ArrayList<Item> item;
+    private String endereco;
 
-    public SampleDataItem() {
+    public SampleDataItem(FileWriter itens) {
         item = new ArrayList<Item>();
+        endereco = itens.toString();
         adicionaItem(item);
     }
 
