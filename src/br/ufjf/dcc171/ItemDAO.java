@@ -1,8 +1,11 @@
 package br.ufjf.dcc171;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -12,39 +15,30 @@ import java.util.Scanner;
 public class ItemDAO {
 
     private static Scanner input;
-    private String endereco;
-    private Formatter output;
     
-    public ItemDAO(String enderecoItem) {
-        this.endereco = enderecoItem;
+    public ItemDAO() {
     }
     
-    public void cria (ArrayList<Item> item)
+    public void cria (ArrayList<Item> item) throws IOException
     {
-        try
-            {
-                output = new Formatter(endereco); 
-                output.format("Escrito// %n");
+        try {
                 for (Item q : item)
-                    output.format("%s//%s//%.2f//%n", q.getNome(), q.getTipoItem(), q.getValor());
-                output.close();
-            }
-        catch (SecurityException securityException)
-            {
-                System.err.println("Write permission denied. Terminating.");
-                System.exit(1); // termina o programa
-            }
-        catch (FileNotFoundException fileNotFoundException)
-              {
-              System.err.println("Error opening file. Terminating.");
-              System.exit(1); // termina o programa
-              }
+                {   
+                    FileWriter fw = new FileWriter("item.txt", true);
+                    BufferedWriter conexao = new BufferedWriter(fw);
+                    conexao.write(q.getNome()+ "//" + q.getTipoItem() + "//" + q.getValor() + "//");
+                    conexao.newLine();
+                    conexao.close();
+                }
+        } catch (FileNotFoundException e) {
+		e.printStackTrace();
+        }
     }
 
     public ArrayList<Item> busca () throws IOException
     {
         ArrayList<Item> item = new ArrayList<>();               
-        input = new Scanner (new FileReader(endereco)).useDelimiter("//");
+        input = new Scanner (new FileReader("item.txt")).useDelimiter("//");
                 try
                 {
                     input.next();
@@ -86,7 +80,7 @@ public class ItemDAO {
         try
             {
                 Scanner input;               
-                input = new Scanner (Paths.get(endereco));
+                input = new Scanner ("item.txt");
                 if ("Escrito//".equals(input.next()))
                 {
                     input.close();
@@ -97,17 +91,11 @@ public class ItemDAO {
                     input.close();
                     return true;
                 }
-            }
-        catch (SecurityException securityException)
+            }catch (SecurityException securityException)
             {
                 System.err.println("Write permission denied. Terminating.");
-                System.exit(1); // termina o programa
+                System.exit(1);
             }
-        catch (FileNotFoundException fileNotFoundException)
-              {
-              System.err.println("Error opening file. Terminating.");
-              System.exit(1); // termina o programa
-              }
         return false;
     }
 }

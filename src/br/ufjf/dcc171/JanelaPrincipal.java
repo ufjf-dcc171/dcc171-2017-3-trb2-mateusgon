@@ -19,20 +19,17 @@ import javax.swing.JPanel;
 
 public class JanelaPrincipal extends JFrame{
     
-    private Diretorio dir = new Diretorio();
-    private int contadorPedidos = 0;
     private boolean abrirJanela = true;
     private final JPanel inicio = new JPanel();
     private final JButton administrarItem = new JButton("Administre seus itens");
     private final JButton administrarFuncionamento = new JButton("Administre o funcionamento");
-    private SampleDataItem sdi;
     private List<Mesas> mesas = new ArrayList<>();
+    private Pizzaria res;
     
     public JanelaPrincipal() throws HeadlessException, IOException {
         super("Pizzaria Petini - Bem-vindo");
-        sdi = new SampleDataItem(dir.getArquivoItemEndereco());
-        MesasDAO dao = new MesasDAO(dir.getArquivoMesaEndereco());        
-        mesas = dao.buscar();
+        res = new Pizzaria();
+                  
         setMinimumSize(new Dimension(600, 325));
         setPreferredSize(new Dimension(600, 325));
         administrarItem.setPreferredSize(new Dimension(300, 144));
@@ -47,7 +44,7 @@ public class JanelaPrincipal extends JFrame{
                 if(abrirJanela)
                 {
                     abrirJanela = false;
-                    JanelaControleItem inicio = new JanelaControleItem(sdi);
+                    JanelaControleItem inicio = new JanelaControleItem(res.getSdi());
                     inicio.setSize(650, 350);
                     inicio.setLocationRelativeTo(null);
                     inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +53,7 @@ public class JanelaPrincipal extends JFrame{
                     @Override
                                public void windowClosing(WindowEvent evt) {
                                    inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                   sdi = inicio.getItem();
+                                   res.setSdi(inicio.getItem());
                                    abrirJanela = true;
                                }
                     });
@@ -73,7 +70,7 @@ public class JanelaPrincipal extends JFrame{
                 if (abrirJanela)
                 {
                     abrirJanela = false;
-                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(mesas, sdi, contadorPedidos, dao);
+                    JanelaControleFuncionamento inicio = new JanelaControleFuncionamento(res, res.getSdi());
                     inicio.setSize(730, 600);
                     inicio.setLocationRelativeTo(null);
                     inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,9 +80,7 @@ public class JanelaPrincipal extends JFrame{
                                public void windowClosing(WindowEvent evt) {
                                    inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                    mesas = inicio.getMesas();
-                                   contadorPedidos = inicio.getContadorPedidos();
-                                   abrirJanela = true;
-                                   
+                                   abrirJanela = true;              
                                }
                     });
                 }

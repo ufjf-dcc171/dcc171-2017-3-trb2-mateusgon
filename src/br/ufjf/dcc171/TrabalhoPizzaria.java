@@ -1,12 +1,14 @@
 package br.ufjf.dcc171;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 
 public class TrabalhoPizzaria {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws HeadlessException, IOException {
         JanelaPrincipal inicio = new JanelaPrincipal();
         inicio.setSize(600, 325);
         inicio.setLocationRelativeTo(null);

@@ -41,16 +41,13 @@ public class JanelaControleFuncionamento extends JFrame {
         private final JButton totalFaturado = new JButton("Total Faturado");
         private final JButton verPedido = new JButton("Ver Pedido");
     
-    public JanelaControleFuncionamento(List<Mesas> sampleData, SampleDataItem sdi, int ContadorPedidos, MesasDAO mesasDao) throws HeadlessException {
+    public JanelaControleFuncionamento(Pizzaria p, SampleDataItem sdi) throws HeadlessException {
         super("Controle de Pedidos");
         setPreferredSize(new Dimension(730, 600));
         setMinimumSize(new Dimension(500, 400));
         
-        this.contadorPedidos = ContadorPedidos;
-        
-        this.mesas = sampleData;
+        this.mesas = p.getMesas();
         lstMesas.setModel(new MesasListModel(mesas));
-        
         
         lstMesas.setMinimumSize(new Dimension(200, 200));
         lstPedidos.setMinimumSize(new Dimension(500, 200));
@@ -66,7 +63,6 @@ public class JanelaControleFuncionamento extends JFrame {
         botoes.add(excluirPedido);
         botoes.add(verPedido);
         botoes.add(fecharConta);
-        
         
         add(new JScrollPane(lstMesas), BorderLayout.WEST);
         add(new JScrollPane(lstPedidos), BorderLayout.CENTER);
@@ -97,7 +93,7 @@ public class JanelaControleFuncionamento extends JFrame {
                Mesas m = new Mesas("Mesa " + i, i);
                mesas.add(m);
                lstMesas.updateUI();
-               mesasDao.adicionar(m);
+               p.gravar(mesas);
                pack();
             }
         });

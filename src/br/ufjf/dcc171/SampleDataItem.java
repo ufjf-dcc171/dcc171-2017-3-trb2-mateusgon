@@ -2,24 +2,26 @@ package br.ufjf.dcc171;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class SampleDataItem {
     private ArrayList<Item> item;
     private ItemDAO dao;
 
-    public SampleDataItem(String itens) throws IOException {
+    public SampleDataItem() throws IOException {
         item = new ArrayList<Item>();
-        dao = new ItemDAO(itens);
+        dao = new ItemDAO();
         if (dao.vazio()){
-            adicionaItem(item);}
+            adicionaItem();
+        }
         else
         {
             carregaItem();
         }
     }
 
-    private void adicionaItem(ArrayList<Item> itemList) {
+    private void adicionaItem() throws IOException {
         Item item[] = new Item[20];
         item[0] = new Item("Pepperoni (Pepperoni e Manjericão)", "Pizza Salgada", 42.90);
         item[1] = new Item("Champignon (Champignon e Azeitona Preta)", "Pizza Salgada", 40.90);
@@ -43,9 +45,9 @@ public class SampleDataItem {
         item[19] = new Item("Cerveja Long Neck", "Bebida", 7.00);
         for (int i = 0; i < 20; i++)
         {
-            itemList.add(item[i]);
+            this.item.add(item[i]);
         }
-        dao.cria(itemList);
+        dao.cria(this.item);
     }
     
     private void carregaItem () throws IOException

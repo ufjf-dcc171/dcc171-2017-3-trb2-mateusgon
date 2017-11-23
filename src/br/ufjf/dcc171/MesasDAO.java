@@ -5,30 +5,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MesasDAO {
 
-    private String endereco;
+    private Integer contador=0;
     
-    public MesasDAO(String enderecoMesas) {
-        endereco = enderecoMesas;
+    public MesasDAO() {
+        
     }
 
-    public void criar ()
-    {
-    
-    }
-
-    public void adicionar (Mesas m)
+    public void adicionar (List<Mesas> m)
     {
         try {
-		FileWriter fw = new FileWriter(endereco, true);
-		BufferedWriter conexao = new BufferedWriter(fw);
-                conexao.write(m.getNome() + "//");
-		conexao.newLine();
-		conexao.close();
+                for (Mesas q : m)
+                {
+                    FileWriter fw = new FileWriter("funcionamento.txt", true);
+                    BufferedWriter conexao = new BufferedWriter(fw);
+                    conexao.write(q.getNome() + "//");
+                    conexao.newLine();
+                    conexao.close();
+                }
         } catch (Exception e) {
 		e.printStackTrace();
         }
@@ -44,8 +43,8 @@ public class MesasDAO {
                 {
                     while (input.hasNext())
                     {
-                        Mesas me = new Mesas();
-                        me.setNome(input.next());
+                        Mesas me = new Mesas(input.next(), contador);
+                        contador++;
                         m.add(me);
                         System.out.println(me);
                     }
@@ -64,7 +63,6 @@ public class MesasDAO {
 
     public void excluir ()
     {
-    
-    }
-    
+        
+    }    
 }
