@@ -23,13 +23,12 @@ public class JanelaPrincipal extends JFrame{
     private final JPanel inicio = new JPanel();
     private final JButton administrarItem = new JButton("Administre seus itens");
     private final JButton administrarFuncionamento = new JButton("Administre o funcionamento");
-    private List<Mesas> mesas = new ArrayList<>();
     private Pizzaria res;
     
     public JanelaPrincipal() throws HeadlessException, IOException {
         super("Pizzaria Petini - Bem-vindo");
         res = new Pizzaria();
-                  
+
         setMinimumSize(new Dimension(600, 325));
         setPreferredSize(new Dimension(600, 325));
         administrarItem.setPreferredSize(new Dimension(300, 144));
@@ -79,7 +78,6 @@ public class JanelaPrincipal extends JFrame{
                     @Override
                                public void windowClosing(WindowEvent evt) {
                                    inicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                   mesas = inicio.getMesas();
                                    abrirJanela = true;              
                                }
                     });

@@ -8,11 +8,13 @@ import javax.swing.JOptionPane;
 
 public class Diretorio {
 
+    private File arquivo = new File("funcionamento.txt");
     private FileWriter arquivoFuncionamento;
     private FileWriter arquivoItem;
     private Boolean existe = false;
 
     public Diretorio() {
+        if (!arquivo.exists())
             try {
                 arquivoFuncionamento = new FileWriter("funcionamento.txt");    
                 arquivoItem = new FileWriter("item.txt");    

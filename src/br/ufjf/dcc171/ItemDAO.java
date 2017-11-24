@@ -22,14 +22,14 @@ public class ItemDAO {
     public void cria (ArrayList<Item> item) throws IOException
     {
         try {
+            FileWriter fw = new FileWriter("item.txt", true);
+            BufferedWriter conexao = new BufferedWriter(fw);
                 for (Item q : item)
                 {   
-                    FileWriter fw = new FileWriter("item.txt", true);
-                    BufferedWriter conexao = new BufferedWriter(fw);
                     conexao.write(q.getNome()+ "//" + q.getTipoItem() + "//" + q.getValor() + "//");
                     conexao.newLine();
-                    conexao.close();
                 }
+            conexao.close();
         } catch (FileNotFoundException e) {
 		e.printStackTrace();
         }

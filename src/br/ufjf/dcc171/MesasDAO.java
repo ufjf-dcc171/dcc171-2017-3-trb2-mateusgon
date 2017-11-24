@@ -23,9 +23,9 @@ public class MesasDAO {
             BufferedWriter conexao = new BufferedWriter(fw);
             for (Mesas q : m) { //diretorio.getArquivoFuncionamento
                 List<Pedido> pedido = q.getPedidos();
-                conexao.write(q.getNome() + "//" + q.getNumero() + "//");
-                p.adicionar(pedido, conexao, idp);
+                conexao.write(q.getNome() + "//" + q.getNumero() + "//" + q.getPedidos().size()+"//");
                 conexao.newLine();
+                p.adicionar(pedido, conexao, idp);
             }
             conexao.close();
         } catch (Exception e) {
@@ -33,28 +33,27 @@ public class MesasDAO {
         }
     }
 
-    public ArrayList<Mesas> buscar() throws FileNotFoundException {
+    public ArrayList<Mesas> buscar(PedidoDAO pedido, ItemDoPedidoDAO idp) throws FileNotFoundException {
         ArrayList<Mesas> m = new ArrayList<>();
-        Mesas a = new Mesas("Mesa 0", 0);
-        m.add(a);
-        Scanner input = new Scanner(new FileReader("q.txt")).useDelimiter("//");
+        Scanner input = new Scanner(new FileReader("funcionamento.txt")).useDelimiter("//");
         try {
             while (input.hasNext()) {
-                Mesas me = new Mesas(input.next(), contador);
-                contador++;
+                String a = input.next();
+                int b = input.nextInt();
+                int c = input.nextInt();
+                Mesas me = new Mesas(a, b);
                 m.add(me);
-                System.out.println(me);
+                if (c > 0)
+                {
+                    me.setPedidos(pedido.buscar(idp, input, c));
+                }
             }
-        } catch (NoSuchElementException elementException) {
-            System.err.println("File improperly formed. Terminating.");
+       } catch (NoSuchElementException elementException) {
+            System.out.println("Todas as leituras feitas.");
         } catch (IllegalStateException stateException) {
             System.err.println("Error reading from file. Terminating.");
         }
         input.close();
         return m;
-    }
-
-    public void excluir() {
-
     }
 }

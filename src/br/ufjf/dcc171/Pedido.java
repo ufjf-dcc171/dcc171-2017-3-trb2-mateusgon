@@ -19,6 +19,16 @@ public class Pedido {
         this.nome = nome;
     }
 
+    public Pedido(String nome, boolean statusAberto, String aberto, String fechado, Double valor) {
+        this.nome = nome;
+        this.statusAberto = statusAberto;
+        this.aberto = aberto;
+        this.fechado = fechado;
+        this.valor = valor;
+    }
+    
+    
+
     public Pedido ()
     {
         itemDoPedido = new ArrayList<ItemDoPedido>();

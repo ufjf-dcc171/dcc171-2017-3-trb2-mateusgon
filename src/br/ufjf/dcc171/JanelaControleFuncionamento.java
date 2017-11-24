@@ -27,7 +27,6 @@ import javax.swing.event.ListSelectionListener;
 public class JanelaControleFuncionamento extends JFrame {
 
         private boolean abrirJanela = true;
-        private int i;
         private int contadorPedidos;
         private final List<Mesas> mesas;
         private final JList<Mesas> lstMesas = new JList<>(new DefaultListModel<>());
@@ -89,12 +88,11 @@ public class JanelaControleFuncionamento extends JFrame {
         adicionarMesa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
-               i++;
-               Mesas m = new Mesas("Mesa " + i, i);
+               Mesas m = new Mesas("Mesa " + pizzaria.getContadorDeMesas(), pizzaria.getContadorDeMesas());
+               pizzaria.aumentarContadorDeMesas();
                mesas.add(m);
                lstMesas.updateUI();
                pizzaria.gravar(mesas);
-               pack();
             }
         });
         
@@ -372,8 +370,6 @@ public class JanelaControleFuncionamento extends JFrame {
                                 jc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
                         });
-                        lstMesas.clearSelection();
-                        lstPedidos.clearSelection();
                         lstMesas.updateUI();
                         lstPedidos.updateUI();
                         pizzaria.gravar(mesas);
@@ -393,12 +389,6 @@ public class JanelaControleFuncionamento extends JFrame {
             }
         });  
     }  
-    
-    public List<Mesas> getMesas()
-    {
-        return this.mesas;
-    }
-
     public int getContadorPedidos() {
         return contadorPedidos;
     }
