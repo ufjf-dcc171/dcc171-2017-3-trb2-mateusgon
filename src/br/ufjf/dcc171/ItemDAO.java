@@ -63,8 +63,6 @@ public class ItemDAO {
                    System.err.println("Error reading from file. Terminating.");
                 } 
         input.close();
-        for (Item q : item)
-                   System.out.println(q.getNome());
         return item;
     }
     

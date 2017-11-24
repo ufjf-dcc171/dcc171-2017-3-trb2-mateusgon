@@ -1,20 +1,39 @@
 Pepperoni (Pepperoni e Manjericão)//Pizza Salgada//42.9//
+
 Champignon (Champignon e Azeitona Preta)//Pizza Salgada//40.9//
+
 Pizza Ao Alho (Alho torrado e azeite)//Pizza Salgada//40.9//
+
 Portuguesa (Presunto, ovo, cebola e azeitona preta)//Pizza Salgada//41.9//
+
 Frango c/ Requeijão (Peito de frango, azeitona preta e requeijão)//Pizza Salgada//42.9//
+
 4 queijos (Provolone, requeijão, parmesão e mussarela)//Pizza Salgada//43.9//
+
 Napolitana (Parmesão e muito mais rodelas de tomate)//Pizza Salgada//41.9//
+
 Palmito (Presunto, palmito, azeitona preta e manjericão)//Pizza Salgada//42.9//
+
 Banana com Canela (Mussarela, Banana, açúcar, canela)//Pizza Doce//40.9//
+
 Brigadeiro (Mussarela, chocolate e granulado de chocolate)//Pizza Doce//41.9//
+
 Roma (Mussarela, banana, açúcar, canela e chocolate)//Pizza Doce//43.9//
+
 Bibiena (Massa de chocolate, chocolate, mini-confetes)//Pizza Doce//43.9//
+
 Sorve Napolitano//Sobremesa//5.0//
+
 Petit Gateau e Sorvete Napolitano//Sobremesa//13.0//
+
 Banana Split//Sobremesa//10.0//
+
 Milk Shake//Sobremesa//9.0//
+
 Refrigerante 600ml//Bebida//6.0//
+
 Refrigerante 1,5lts//Bebida//10.0//
+
 Suco Copo 500ml//Bebida//5.0//
+
 Cerveja Long Neck//Bebida//7.0//

@@ -388,13 +388,14 @@ public class JanelaPedido extends JFrame{
         layouts.setSelectedIndex(0);
     }
     
-    Pedido pedidoSelecionado (String nome)
+    Pedido pedidoSelecionado (String nome, Integer numero)
         {  
             if(nome == null)
                 return null;
             else
             {
                 pedido.setNome(nome);
+                pedido.setNumero(numero);
                 return this.pedido;
             }
             

@@ -37,8 +37,6 @@ public class Pedido {
         itemDoPedido = new ArrayList<ItemDoPedido>();
     }
     
-    
-    
     public String getNome() {
         return nome;
     }

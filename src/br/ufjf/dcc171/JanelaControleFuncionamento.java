@@ -152,7 +152,7 @@ public class JanelaControleFuncionamento extends JFrame {
                             @Override
                             public void windowClosing(WindowEvent evt) {
                                 if (realizarPedido.getFechar()) {
-                                    Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + pizzaria.getContadorDePedidos());
+                                    Pedido p1 = realizarPedido.pedidoSelecionado("Pedido " + pizzaria.getContadorDePedidos(), pizzaria.getContadorDePedidos());
                                     pizzaria.aumentarContadorDePedidos();
                                     lstMesas.getSelectedValue().getPedidos().add(p1);
                                     lstPedidos.updateUI();
