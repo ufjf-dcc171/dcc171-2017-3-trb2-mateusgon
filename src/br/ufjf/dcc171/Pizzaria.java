@@ -30,9 +30,9 @@ class Pizzaria {
             {
                 for (j = 0; j < mesas.get(i).getPedidos().size(); j++)
                 {    
-                    if (mesas.get(i).getPedidos().get(j).getNumero() > contadorDePedidos);
+                    if (mesas.get(i).getPedidos().get(j).getNumero() > this.contadorDePedidos)
                     {
-                        contadorDePedidos = mesas.get(i).getPedidos().get(j).getNumero();                   
+                        this.contadorDePedidos = mesas.get(i).getPedidos().get(j).getNumero() + 1;     
                     }
                 }
                 i++;
