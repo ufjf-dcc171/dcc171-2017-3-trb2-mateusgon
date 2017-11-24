@@ -41,12 +41,12 @@ public class JanelaControleFuncionamento extends JFrame {
         private final JButton totalFaturado = new JButton("Total Faturado");
         private final JButton verPedido = new JButton("Ver Pedido");
     
-    public JanelaControleFuncionamento(Pizzaria p, SampleDataItem sdi) throws HeadlessException {
+    public JanelaControleFuncionamento(Pizzaria pizzaria, SampleDataItem sdi) throws HeadlessException {
         super("Controle de Pedidos");
         setPreferredSize(new Dimension(730, 600));
         setMinimumSize(new Dimension(500, 400));
         
-        this.mesas = p.getMesas();
+        this.mesas = pizzaria.getMesas();
         lstMesas.setModel(new MesasListModel(mesas));
         
         lstMesas.setMinimumSize(new Dimension(200, 200));
@@ -93,7 +93,7 @@ public class JanelaControleFuncionamento extends JFrame {
                Mesas m = new Mesas("Mesa " + i, i);
                mesas.add(m);
                lstMesas.updateUI();
-               p.gravar(mesas);
+               pizzaria.gravar(mesas);
                pack();
             }
         });
@@ -116,6 +116,7 @@ public class JanelaControleFuncionamento extends JFrame {
                        if (!fecharMesa)
                        {
                             mesas.remove(lstMesas.getSelectedValue());
+                            pizzaria.gravar(mesas);
                             lstMesas.clearSelection();
                             lstMesas.updateUI();
                        }
@@ -160,6 +161,7 @@ public class JanelaControleFuncionamento extends JFrame {
                                     lstMesas.updateUI();
                                     realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                     abrirJanela = true;
+                                    pizzaria.gravar(mesas);
                                 } else {
                                     int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
                                     if (resposta == JOptionPane.YES_OPTION) {
@@ -171,7 +173,7 @@ public class JanelaControleFuncionamento extends JFrame {
                                         actionPerformed(e);
                                     }
                                 }
-                            }
+                            }                           
                         });
                     }
                     else
@@ -195,6 +197,7 @@ public class JanelaControleFuncionamento extends JFrame {
                                     lstMesas.updateUI();
                                     realizarPedido.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                     abrirJanela = true;
+                                    pizzaria.gravar(mesas);
                                 } else {
                                     int resposta = JOptionPane.showConfirmDialog(null, "Pedido vazio. \nTerminou realmente o seu pedido?", "Confirmação", JOptionPane.YES_NO_OPTION);
                                     if (resposta == JOptionPane.YES_OPTION) {
@@ -237,6 +240,7 @@ public class JanelaControleFuncionamento extends JFrame {
                     lstPedidos.clearSelection();
                     lstMesas.updateUI();
                     lstPedidos.updateUI();
+                    pizzaria.gravar(mesas);
                 }
                 else if (selecionado == null)
                 {
@@ -372,6 +376,7 @@ public class JanelaControleFuncionamento extends JFrame {
                         lstPedidos.clearSelection();
                         lstMesas.updateUI();
                         lstPedidos.updateUI();
+                        pizzaria.gravar(mesas);
                     } else if (selecionado != null && selecionado2 == null && selecionado.getPedidos().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Não há pedidos para fechar.", "Não há pedidos.", JOptionPane.INFORMATION_MESSAGE);
                     } else if (selecionado != null && selecionado2 == null)

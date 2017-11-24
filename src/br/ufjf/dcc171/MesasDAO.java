@@ -11,58 +11,50 @@ import java.util.Scanner;
 
 public class MesasDAO {
 
-    private Integer contador=0;
-    
+    private Integer contador = 0;
+
     public MesasDAO() {
-        
+
     }
 
-    public void adicionar (List<Mesas> m)
-    {
+    public void adicionar(List<Mesas> m, PedidoDAO p, ItemDoPedidoDAO idp) {
         try {
-                for (Mesas q : m)
-                {
-                    FileWriter fw = new FileWriter("funcionamento.txt", true);
-                    BufferedWriter conexao = new BufferedWriter(fw);
-                    conexao.write(q.getNome() + "//");
-                    conexao.newLine();
-                    conexao.close();
-                }
+            FileWriter fw = new FileWriter("funcionamento.txt", false);
+            BufferedWriter conexao = new BufferedWriter(fw);
+            for (Mesas q : m) { //diretorio.getArquivoFuncionamento
+                List<Pedido> pedido = q.getPedidos();
+                conexao.write(q.getNome() + "//" + q.getNumero() + "//");
+                p.adicionar(pedido, conexao, idp);
+                conexao.newLine();
+            }
+            conexao.close();
         } catch (Exception e) {
-		e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
-    public ArrayList<Mesas> buscar () throws FileNotFoundException
-    {
-        ArrayList <Mesas> m = new ArrayList<>();
+    public ArrayList<Mesas> buscar() throws FileNotFoundException {
+        ArrayList<Mesas> m = new ArrayList<>();
         Mesas a = new Mesas("Mesa 0", 0);
         m.add(a);
-        Scanner input = new Scanner (new FileReader(endereco)).useDelimiter("//");
-                try
-                {
-                    while (input.hasNext())
-                    {
-                        Mesas me = new Mesas(input.next(), contador);
-                        contador++;
-                        m.add(me);
-                        System.out.println(me);
-                    }
-                }
-                catch (NoSuchElementException elementException)
-                {
-                  System.err.println("File improperly formed. Terminating.");
-                }
-                catch (IllegalStateException stateException)
-                {
-                   System.err.println("Error reading from file. Terminating.");
-                } 
+        Scanner input = new Scanner(new FileReader("q.txt")).useDelimiter("//");
+        try {
+            while (input.hasNext()) {
+                Mesas me = new Mesas(input.next(), contador);
+                contador++;
+                m.add(me);
+                System.out.println(me);
+            }
+        } catch (NoSuchElementException elementException) {
+            System.err.println("File improperly formed. Terminating.");
+        } catch (IllegalStateException stateException) {
+            System.err.println("Error reading from file. Terminating.");
+        }
         input.close();
         return m;
     }
 
-    public void excluir ()
-    {
-        
-    }    
+    public void excluir() {
+
+    }
 }

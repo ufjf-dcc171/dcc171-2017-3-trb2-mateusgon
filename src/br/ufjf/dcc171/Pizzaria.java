@@ -14,6 +14,7 @@ class Pizzaria {
     private MesasDAO mesasDAO = new MesasDAO();
     private ItemDAO itemDAO = new ItemDAO();
     private PedidoDAO pedidoDAO = new PedidoDAO();
+    private ItemDoPedidoDAO itemDoPedidoDao = new ItemDoPedidoDAO();
     
     
     public Pizzaria(SampleDataItem sdi, Diretorio dir) {
@@ -28,7 +29,7 @@ class Pizzaria {
     
     public void gravar (List<Mesas> m)
     {
-        mesasDAO.adicionar(m);
+        mesasDAO.adicionar(m, pedidoDAO, itemDoPedidoDao);
     }
     public void ler ()
     {
