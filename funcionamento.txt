@@ -1,3 +1,12 @@
-Mesa 0//0//1//
-Pedido 0//true//24/11/2017 00:42:02//null//293.3//1
-Portuguesa (Presunto, ovo, cebola e azeitona preta)//Pizza Salgada//41.9//7//
+Mesa 0//0//0//
+
+
+Mesa 1//1//1//
+Pedido 0//true//24/11/2017 01:41:52//null//85.8//1//
+Pepperoni (Pepperoni e Manjericão)//Pizza Salgada//42.9//2//
+
+Mesa 2//2//1//
+
+Pedido 0//true//24/11/2017 01:41:27//null//42.9//1//
+
+Pepperoni (Pepperoni e Manjericão)//Pizza Salgada//42.9//1//

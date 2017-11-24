@@ -14,14 +14,35 @@ class Pizzaria {
     private ItemDAO itemDAO = new ItemDAO();
     private PedidoDAO pedidoDAO = new PedidoDAO();
     private ItemDoPedidoDAO itemDoPedidoDao = new ItemDoPedidoDAO();
-    private Integer contadorDeMesas = 0; 
+    private Integer contadorDeMesas; 
+    private Integer contadorDePedidos=0;
     
     public Pizzaria() throws IOException {
         dir = new Diretorio();
         sdi = new SampleDataItem();
         ler();
-        //contadorDeMesas = mesas.get(0).getNumero();
-    }
+        try 
+        {
+            contadorDeMesas = mesas.get(mesas.size()-1).getNumero() + 1;
+            int i = 0;
+            int j = 0;
+            for (Mesas m : mesas)
+            {
+                for (j = 0; j < mesas.get(i).getPedidos().size(); j++)
+                {    
+                    if (mesas.get(i).getPedidos().get(j).getNumero() > contadorDePedidos);
+                    {
+                        contadorDePedidos = mesas.get(i).getPedidos().get(j).getNumero();                   
+                    }
+                }
+                i++;
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            contadorDeMesas = 0;
+        }
+      }
     
     public void gravar (List<Mesas> m)
     {
@@ -32,6 +53,11 @@ class Pizzaria {
         this.mesas = mesasDAO.buscar(pedidoDAO, itemDoPedidoDao);       
     }
 
+    public void atualizarItem () throws IOException
+    {
+        sdi.atualiza();
+    }
+    
     public SampleDataItem getSdi() {
         return sdi;
     }
@@ -98,5 +124,18 @@ class Pizzaria {
 
     public void aumentarContadorDeMesas() {
         this.contadorDeMesas = this.contadorDeMesas + 1;
+    }
+
+    public Integer getContadorDePedidos() {
+        return contadorDePedidos;
+    }
+
+    public void setContadorDePedidos(Integer contadorDePedidos) {
+        this.contadorDePedidos = contadorDePedidos;
+    }
+    
+    public void aumentarContadorDePedidos ()
+    {
+        this.contadorDePedidos = this.contadorDePedidos + 1;
     }
 }

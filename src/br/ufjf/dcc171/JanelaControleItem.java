@@ -9,6 +9,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -33,10 +36,10 @@ public class JanelaControleItem extends JFrame{
     private JPanel janelaItem = new JPanel();
     private final JComboBox<String> layouts = new JComboBox<>(new String[]{"Adicionar", "Alterar", "Remover"});  
     
-    public JanelaControleItem(SampleDataItem sdi) throws HeadlessException {
+    public JanelaControleItem(Pizzaria pizzaria) throws HeadlessException {
         super("Administração de Itens");
         this.modificado=null;
-        item = sdi;
+        item = pizzaria.getSdi();
         add(layouts, BorderLayout.NORTH);
         add(new JScrollPane(janelaItem), BorderLayout.CENTER);
         layouts.addActionListener(new ActionListener() {
@@ -122,9 +125,13 @@ public class JanelaControleItem extends JFrame{
                                     if (valor != 0)
                                     {
                                         novo.setValor(valor);
-                                        sdi.getItem().add(novo);
+                                        pizzaria.getSdi().getItem().add(novo);
                                         JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-    
+                                        try {
+                                            pizzaria.atualizarItem();
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(JanelaControleItem.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
                                     }
                                     else
                                     {
@@ -162,8 +169,8 @@ public class JanelaControleItem extends JFrame{
                             if (abrirJanela)
                             {
                                 abrirJanela = false;
-                                int i = sdi.getItem().indexOf(selecionado);
-                                JanelaControleItem modific = new JanelaControleItem(sdi.getItem().get(i));
+                                int i = pizzaria.getSdi().getItem().indexOf(selecionado);
+                                JanelaControleItem modific = new JanelaControleItem(pizzaria.getSdi().getItem().get(i));
                                 modific.setSize(600, 150);
                                 modific.setLocationRelativeTo(null);
                                 modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -173,9 +180,14 @@ public class JanelaControleItem extends JFrame{
                                     public void windowClosing(WindowEvent evt) {
                                             modific.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                             Item a = modific.getModificado();
-                                            sdi.getItem().get(i).setNome(a.getNome());
-                                            sdi.getItem().get(i).setTipoItem(a.getTipoItem());
-                                            sdi.getItem().get(i).setValor(a.getValor());
+                                            pizzaria.getSdi().getItem().get(i).setNome(a.getNome());
+                                            pizzaria.getSdi().getItem().get(i).setTipoItem(a.getTipoItem());
+                                            pizzaria.getSdi().getItem().get(i).setValor(a.getValor());
+                                        try {
+                                            pizzaria.atualizarItem();
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(JanelaControleItem.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
                                             lstItem.clearSelection();
                                             lstItem.updateUI();
                                             abrirJanela = true;
@@ -212,7 +224,12 @@ public class JanelaControleItem extends JFrame{
                     Item selecionado = lstItem.getSelectedValue();
                        if (selecionado != null)
                        {
-                           sdi.getItem().remove(selecionado);
+                           pizzaria.getSdi().getItem().remove(selecionado);
+                        try {
+                            pizzaria.atualizarItem();
+                        } catch (IOException ex) {
+                            Logger.getLogger(JanelaControleItem.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                            lstItem.clearSelection();
                            lstItem.updateUI();
                        }

@@ -43,7 +43,7 @@ public class JanelaPrincipal extends JFrame{
                 if(abrirJanela)
                 {
                     abrirJanela = false;
-                    JanelaControleItem inicio = new JanelaControleItem(res.getSdi());
+                    JanelaControleItem inicio = new JanelaControleItem(res);
                     inicio.setSize(650, 350);
                     inicio.setLocationRelativeTo(null);
                     inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -50,6 +50,11 @@ public class SampleDataItem {
         dao.cria(this.item);
     }
     
+    public void atualiza () throws IOException
+    {
+        dao.cria(this.item);
+    }
+    
     private void carregaItem () throws IOException
     {
         this.item = dao.busca();
@@ -82,6 +87,5 @@ public class SampleDataItem {
     public void setItem(ArrayList<Item> item) {
         this.item = item;
     }
-    
     
 }

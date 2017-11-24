@@ -1,6 +1,7 @@
 package br.ufjf.dcc171;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,12 +10,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ItemDAO {
 
     private static Scanner input;
+    private File arquivo = new File("item.txt");
     
     public ItemDAO() {
     }
@@ -22,7 +25,7 @@ public class ItemDAO {
     public void cria (ArrayList<Item> item) throws IOException
     {
         try {
-            FileWriter fw = new FileWriter("item.txt", true);
+            FileWriter fw = new FileWriter("item.txt", false);
             BufferedWriter conexao = new BufferedWriter(fw);
                 for (Item q : item)
                 {   
@@ -39,9 +42,9 @@ public class ItemDAO {
     {
         ArrayList<Item> item = new ArrayList<>();               
         input = new Scanner (new FileReader("item.txt")).useDelimiter("//");
-                try
+        input.useLocale(Locale.ENGLISH);
+            try
                 {
-                    input.next();
                     while (input.hasNext())
                     {
                         Item a = new Item();
@@ -70,18 +73,13 @@ public class ItemDAO {
     
     }        
      
-    public void exclui (Item item)
-    {
-        
-    }
-    
     public Boolean vazio () throws IOException
     {
         try
             {
                 Scanner input;               
                 input = new Scanner ("item.txt");
-                if ("Escrito//".equals(input.next()))
+                if (arquivo.exists() && arquivo.length() != 0)
                 {
                     input.close();
                     return false;

@@ -1,6 +1,7 @@
 package br.ufjf.dcc171;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 public class MesasDAO {
 
     private Integer contador = 0;
-
+    
     public MesasDAO() {
 
     }
@@ -38,11 +39,9 @@ public class MesasDAO {
         Scanner input = new Scanner(new FileReader("funcionamento.txt")).useDelimiter("//");
         try {
             while (input.hasNext()) {
-                String a = input.next();
-                int b = input.nextInt();
-                int c = input.nextInt();
-                Mesas me = new Mesas(a, b);
+                Mesas me = new Mesas(input.next(), input.nextInt());
                 m.add(me);
+                int c = input.nextInt();
                 if (c > 0)
                 {
                     me.setPedidos(pedido.buscar(idp, input, c));

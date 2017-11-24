@@ -9,18 +9,21 @@ import java.util.List;
 public class Pedido {
 
     private String nome;
+    private Integer numero;
     private List<ItemDoPedido> itemDoPedido;
     private boolean statusAberto;
     private String aberto;
     private String fechado;
     private Double valor;
 
-    public Pedido(String nome) {
+    public Pedido(String nome, Integer numero) {
         this.nome = nome;
+        this.numero = numero;
     }
 
-    public Pedido(String nome, boolean statusAberto, String aberto, String fechado, Double valor) {
+    public Pedido(String nome, Integer numero, boolean statusAberto, String aberto, String fechado, Double valor) {
         this.nome = nome;
+        this.numero = numero;
         this.statusAberto = statusAberto;
         this.aberto = aberto;
         this.fechado = fechado;
@@ -33,6 +36,8 @@ public class Pedido {
     {
         itemDoPedido = new ArrayList<ItemDoPedido>();
     }
+    
+    
     
     public String getNome() {
         return nome;
@@ -95,6 +100,14 @@ public class Pedido {
             return this.nome + " - R$" + resultado + " - Aberto: " + this.aberto + " - Status: Aberto";
         else
             return this.nome + " - R$" + resultado + " - Fechado: " + this.fechado + " - Status: Fechado";
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
     
