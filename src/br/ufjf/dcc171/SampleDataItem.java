@@ -7,9 +7,9 @@ public class SampleDataItem {
     private ArrayList<Item> item;
     private ItemDAO dao;
 
-    public SampleDataItem() throws IOException {
+    public SampleDataItem(ItemDAO dao) throws IOException {
         item = new ArrayList<Item>();
-        dao = new ItemDAO();
+        this.dao = dao;
         if (dao.vazio()){
             adicionaItem();
         }

@@ -10,8 +10,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MesasDAO {
-
-    private Integer contador = 0;
     
     public MesasDAO() {
 
@@ -21,7 +19,7 @@ public class MesasDAO {
         try {
             FileWriter fw = new FileWriter("funcionamento.txt", false);
             BufferedWriter conexao = new BufferedWriter(fw);
-            for (Mesas q : m) { //diretorio.getArquivoFuncionamento
+            for (Mesas q : m) { 
                 List<Pedido> pedido = q.getPedidos();
                 conexao.write(q.getNome() + "//" + q.getNumero() + "//" + q.getPedidos().size()+"//");
                 conexao.newLine();

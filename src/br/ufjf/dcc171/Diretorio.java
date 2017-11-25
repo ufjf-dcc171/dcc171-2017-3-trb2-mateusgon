@@ -9,7 +9,6 @@ public class Diretorio {
     private File arquivo = new File("funcionamento.txt");
     private FileWriter arquivoFuncionamento;
     private FileWriter arquivoItem;
-    private Boolean existe = false;
 
     public Diretorio() {
         if (!arquivo.exists())
@@ -20,15 +19,7 @@ public class Diretorio {
                 JOptionPane.showMessageDialog(null, "Erro ao criar o diretorio");
             }
         }
-   
-    public Boolean getExiste() {
-        return existe;
-    }
-
-    public void setExiste(Boolean existe) {
-        this.existe = existe;
-    }
-
+  
     public FileWriter getArquivoFuncionamento() {
         return arquivoFuncionamento;
     }

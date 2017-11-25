@@ -63,11 +63,6 @@ public class ItemDAO {
         return item;
     }
     
-    public void altera ()
-    {
-    
-    }        
-     
     public Boolean vazio () throws IOException
     {
         try

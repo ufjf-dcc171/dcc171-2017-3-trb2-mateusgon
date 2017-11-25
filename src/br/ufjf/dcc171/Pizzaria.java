@@ -19,7 +19,7 @@ class Pizzaria {
     
     public Pizzaria() throws IOException {
         dir = new Diretorio();
-        sdi = new SampleDataItem();
+        sdi = new SampleDataItem(itemDAO);
         ler();
         try 
         {
