@@ -1,13 +1,40 @@
-# ufjf-dcc171-2017-3-trb1-mateusgon
-ufjf-dcc171-2017-3-trb1-mateusgon created by GitHub Classroom
 
-<h2> - Identificação do Aluno </h2>
+<h1> - Identificação do Aluno </h1>
 
 Nome: Mateus Gonçalo do Nascimento.
 
 Matrícula: 201576003.
 
 Curso: Sistemas de Informação.
+
+<h1> Parte 2 - Persistência dos Dados Pizzaria </h1>
+
+<h2> Protocolo de Persistência Desenvolvido </h2>
+
+<p1> Para resolver a persistência dos dados do trabalho foram adicionadas 6 classes. Sendo que para realizar a escrita dos dados serão trabalhados dois arquivos, são eles: "item.txt" e "funcionamento.txt". </p1>
+
+<p1> Existe uma classe chamada de Pizzaria, a qual é responsável por gerenciar todos os dados importantes para o funcionamento das janelas e da Pizzaria. A classe Pizzaria é responsável por criar o MesasDAO, PedidoDAO, ItemDoPedidoDAO e ItemDAO. Além disso, trabalha também com o SampleDataItem (o que é o responsável por gerenciar os itens oferecidos pela pizzaria durante o funcionamento), um contador de pedidos, um contador de mesas e, por fim, a classe Diretório (será detalhada abaixo). </p1>
+
+<p1> Quando iniciado o sistema, a classe Pizzaria é instanciada na classe JanelaPrincipal. A partir de sua instanciação, ela instancia também a classe Diretório e a classe SampleDataItem. No caso da classe diretório, ela verifica se os arquivos "item.txt" e "funcionamento.txt" já existem, caso positivo, os arquivos não são criados. Se já existirem, os arquivos são mantidos e passam a ser utilziados pelas outras classes para serem inicializadas com os dados do último funcionamento. Para a classe SampleDataItem é passado a instância de ItemDAO e o último é utilizado para fazer a leitura do arquivo "item.txt", o qual contêm todos os itens de funcionamento da pizzaria, como nome do item, tipo do item e o seu valor. </p1>
+
+<p1> No construtor da classe Pizzaria existe o método ler(), o qual faz uma chamada para a classe MesasDAO passando por parâmetro uma instância de PedidoDAO e ItemDoPedidoDAO. A classe MesasDAO lê cada mesa, chamando a classe PedidoDAO para ler os pedidos de cada mesa, passando por parâmetro uma instância de ItemDoPedidoDAO. Por fim, a classe PedidoDAO chama a classe ItemDoPedidoDAO, para que os itens de cada pedido possam ser lidos do arquivo. Todas essas classes trabalham com o documento "funcionamento.txt". Após a leitura de todos os dados, a classe MesasDAO possui um ArrayList com todas as mesas, as quais contêm seus pedidos e seus itens dos pedidos. Esse ArrayList é retornado para a classe Pizzaria, a qual possui o controle dos dados, agora, dos dados de funcionamento da pizzaria </p1>
+
+<p1> Quando é necessária uma modificação do arquivo "item.txt" ou "funcionamento.txt", dois métodos da classe Pizzaria podem ser chamados. No caso de itens, o método atualizarItem() é utilizado. Ele utiliza a instância de SampleDataItem, a qual chama a classe atualiza(), e lá a classe de ItemDAO é utilizada e ele atualiza os dados do arquivo "item.txt". A atualização é feita seja por adição, alteração ou exclusão de um item. No caso de funcionamento, a classe Pizzaria possui o método gravar(List<Mesas> m), o qual é responsável por passar o ArrayList de controle das mesas para a classe MesasDAO, chamando um método de MesasDAO passando os parâmetros m, uma instância de PedidoDAO e uma instância de ItemDoPedidoDAO. A classe MesasDAO grava as mesas e chama a classe PedidoDAO, através de um método de uma instância de PedidoDAO, passando por parâmetro uma instância de ItemDoPedidoDAO. A classe PedidoDAO é responsável por gravar os pedidos, por fim, a classe PedidoDAO chama a classe ItemDoPedidoDAO que escreve os itens do pedido no "funcionamento.txt". </p1> 
+
+<p1> O protocolo utilizado para a gravação de itens no arquivo "item.txt" foi: </br>
+Nome do Item // Tipo do Item // Valor do Item //. </br>
+O protocolo utilizado para a gravação de Mesas, Pedidos e Itens do Pedido no arquivo "funcionamento.txt" foram:
+Nome da Mesa // Número da Mesa // Número de Pedidos da Mesa </br>
+Nome do Pedido // Número do Pedido // Status do Pedido (aberto ou fechado) // Horário de Abertura // Horário de Fechamento // Valor do Pedido // Número de Itens do Pedido // </br>
+Nome do Item // Tipo do Item // Valor do Item // Quantidade de Itens // </br>
+
+</p1>
+
+<h2> Melhorias Futuras </h2>
+
+<p1> </p1>
+
+<h1> Parte 1 - Trabalho da Pizzaria </h1>
 
 <h2> - Cenário do Sistema </h2>
 
