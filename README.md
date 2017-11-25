@@ -28,9 +28,21 @@ Nome da Mesa // Número da Mesa // Número de Pedidos da Mesa // </br>
 Nome do Pedido // Número do Pedido // Status do Pedido (aberto ou fechado) // Horário de Abertura // Horário de Fechamento // Valor do Pedido // Número de Itens do Pedido // </br>
 Nome do Item // Tipo do Item // Valor do Item // Quantidade de Itens // </br> </p1>
 
+<p1> Segue no link uma foto para demonstrar um diagrama de classes a fim de melhorar a visualização da disposição das classes </p1>
+
+<p1> Imagem: https://drive.google.com/open?id=1fjNcLqjFQU9j6IEJQjDJekS_dZ27H6oD </br> 
+Obs: Seta tracejada significa nesse caso visibilidade.
+</p1>
+
 <h2> - Melhorias Futuras </h2>
 
-<p1> </p1>
+<p1> Melhorias futuras podem ser realizadas na utilização de XML, abordando de forma mais precisa e melhor os arquivos. No que diz respeito a gravação dos dados, uma melhor disposição dos arquivos de acordo com a escolha do usuário poderia ser uma boa melhoria. Por exemplo, o usuário escolher em qual pasta estão os dois arquivos. </p1>
+
+<p1> Proteção de leitura, gravação e modificação dos arquivos também seria uma melhoria futura interessante e que traria mais segurança a execução do programa, pois o mesmo saberia que os dados estavam gravados de forma correta. </p1>
+
+<p1> Uma outra boa melhoria futura seria uma leitura mais rápida do arquivo, devido ao fato que a sua leitura é sequencial e isso poderá fazer com que a leitura de todos os dados demorem, quanto maior ficar o arquivo. Uma solução de melhoria de leitura eficiente seria bom para que os dados fossem lidos de forma mais rápida. A utilização de Banco de Dados também é uma melhoria futura necessária. </p1>
+
+<p1> Por fim, as questões de melhorias gráficas foram descritas na primeira parte do trabalho e podem ser encontradas abaixo. </p1>
 
 <h1> Parte 1 - Trabalho da Pizzaria </h1>
 
@@ -54,7 +66,7 @@ O total faturado durante o funcionamento do software e, por fim, Fechar a Conta 
 
 <h2> - Modelo de Dados </h2> 
 
-<p1> O modelo de dados pode ser visualizado em: https://imgur.com/a/RGkc9 ou https://drive.google.com/open?id=0B2tDgEVXFkfUVEZRcER3OWVGMWc </br>
+<p1> O modelo de dados pode ser visualizado em: https://imgur.com/a/RGkc9 ou https://drive.google.com/open?id=0B7FVQjttNXUFTi1qcE4xdVQ0U2c </br>
 No geral, o diagrama só mostra o relacionamento entre as classes mais importantes. </br>
 Não foi possível colocar a imagem aqui, por isso, o link. </p1>
 
