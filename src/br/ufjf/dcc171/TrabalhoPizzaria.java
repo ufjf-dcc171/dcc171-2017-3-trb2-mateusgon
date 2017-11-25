@@ -2,8 +2,6 @@ package br.ufjf.dcc171;
 
 import java.awt.HeadlessException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 
 public class TrabalhoPizzaria {

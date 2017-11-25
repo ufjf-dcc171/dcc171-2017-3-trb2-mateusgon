@@ -1,8 +1,6 @@
 package br.ufjf.dcc171;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

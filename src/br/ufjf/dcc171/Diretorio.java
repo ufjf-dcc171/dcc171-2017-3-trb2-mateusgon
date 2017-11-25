@@ -2,8 +2,6 @@ package br.ufjf.dcc171;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import javax.swing.JOptionPane;
 
 public class Diretorio {

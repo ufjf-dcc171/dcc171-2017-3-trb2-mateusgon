@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -56,7 +53,7 @@ public class ItemDAO {
                 }
                 catch (NoSuchElementException elementException)
                 {
-                  System.err.println("File improperly formed. Terminating.");
+                  System.out.println("Todas as leituras de item foram feitas.");
                 }
                 catch (IllegalStateException stateException)
                 {
