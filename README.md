@@ -9,7 +9,7 @@ Curso: Sistemas de Informação.
 
 <h1> Parte 2 - Persistência dos Dados Pizzaria </h1>
 
-<h2> Protocolo de Persistência Desenvolvido </h2>
+<h2> - Protocolo de Persistência Desenvolvido </h2>
 
 <p1> Para resolver a persistência dos dados do trabalho foram adicionadas 6 classes. Sendo que para realizar a escrita dos dados serão trabalhados dois arquivos, são eles: "item.txt" e "funcionamento.txt". </p1>
 
@@ -23,14 +23,12 @@ Curso: Sistemas de Informação.
 
 <p1> O protocolo utilizado para a gravação de itens no arquivo "item.txt" foi: </br>
 Nome do Item // Tipo do Item // Valor do Item //. </br>
-O protocolo utilizado para a gravação de Mesas, Pedidos e Itens do Pedido no arquivo "funcionamento.txt" foram:
-Nome da Mesa // Número da Mesa // Número de Pedidos da Mesa </br>
+O protocolo utilizado para a gravação de Mesas, Pedidos e Itens do Pedido no arquivo "funcionamento.txt" foram: </br>
+Nome da Mesa // Número da Mesa // Número de Pedidos da Mesa // </br>
 Nome do Pedido // Número do Pedido // Status do Pedido (aberto ou fechado) // Horário de Abertura // Horário de Fechamento // Valor do Pedido // Número de Itens do Pedido // </br>
-Nome do Item // Tipo do Item // Valor do Item // Quantidade de Itens // </br>
+Nome do Item // Tipo do Item // Valor do Item // Quantidade de Itens // </br> </p1>
 
-</p1>
-
-<h2> Melhorias Futuras </h2>
+<h2> - Melhorias Futuras </h2>
 
 <p1> </p1>
 
